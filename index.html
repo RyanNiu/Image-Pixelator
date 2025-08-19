@@ -425,7 +425,7 @@
                         <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a4 4 0 004 4h4a2 2 0 002-2V5z">
                                 </path>
                             </svg>
                         </div>
@@ -807,9 +807,17 @@
 
             // 加载示例图片到dropZone
             function loadExampleImage(imageUrl) {
+                // 使用绝对路径确保在不同环境下都能正确加载图片
+                const absoluteImageUrl = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `https://image-pixelator.com/asset/example/${imageUrl}`;
+                
                 // 直接使用fetch API获取图片数据
-                fetch(imageUrl)
-                    .then(response => response.blob())
+                fetch(absoluteImageUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.blob();
+                    })
                     .then(blob => {
                         const file = new File([blob], "example-image.png", { type: "image/png" });
 
@@ -827,6 +835,33 @@
                     })
                     .catch(error => {
                         console.error('Error loading example image:', error);
+                        // 如果绝对路径加载失败，尝试使用相对路径
+                        const fallbackUrl = imageUrl.startsWith('/') ? imageUrl : `/asset/example/${imageUrl}`;
+                        fetch(fallbackUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.blob();
+                            })
+                            .then(blob => {
+                                const file = new File([blob], "example-image.png", { type: "image/png" });
+
+                                // 触发文件处理
+                                const dataTransfer = new DataTransfer();
+                                dataTransfer.items.add(file);
+
+                                const fileInput = document.getElementById('imageInput');
+                                if (fileInput) {
+                                    fileInput.files = dataTransfer.files;
+                                    // 创建并触发change事件
+                                    const event = new Event('change', { bubbles: true });
+                                    fileInput.dispatchEvent(event);
+                                }
+                            })
+                            .catch(fallbackError => {
+                                console.error('Error loading example image with fallback:', fallbackError);
+                            });
                     });
             }
 
@@ -844,8 +879,15 @@
                     img.crossOrigin = 'Anonymous';
                     img.onload = function () {
                         // 创建File对象
-                        fetch(imageUrl)
-                            .then(response => response.blob())
+                        const absoluteImageUrl = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `https://image-pixelator.com/asset/example/${imageUrl}`;
+                        
+                        fetch(absoluteImageUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.blob();
+                            })
                             .then(blob => {
                                 const file = new File([blob], "example-image.png", { type: blob.type });
 
@@ -863,39 +905,12 @@
 
                                 // 清除URL参数
                                 window.history.replaceState({}, document.title, "/");
+                            })
+                            .catch(error => {
+                                console.error('Error loading example image:', error);
                             });
                     };
-                    img.src = imageUrl;
-                });
-            }
-
-            // 设置像素大小
-            if (pixelSize) {
-                window.addEventListener('load', function () {
-                    const pixelSizeInput = document.getElementById('pixelSize');
-                    if (pixelSizeInput) {
-                        pixelSizeInput.value = pixelSize;
-                    }
-                });
-            }
-
-            // 设置颜色模式
-            if (colorMode) {
-                window.addEventListener('load', function () {
-                    const colorModeSelect = document.getElementById('colorMode');
-                    if (colorModeSelect) {
-                        colorModeSelect.value = colorMode;
-                    }
-                });
-            }
-
-            // 设置边缘处理模式
-            if (edgeMode) {
-                window.addEventListener('load', function () {
-                    const edgeModeSelect = document.getElementById('edgeMode');
-                    if (edgeModeSelect) {
-                        edgeModeSelect.value = edgeMode;
-                    }
+                    img.src = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `/asset/example/${imageUrl}`;
                 });
             }
         });
