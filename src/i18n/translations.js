@@ -123,7 +123,10 @@ export const translations = {
     "footer-privacy": "Privacy Policy",
     "footer-terms": "Terms of Service",
     "footer-contact": "Contact",
-    "footer-rights": "All rights reserved."
+    "footer-rights": "All rights reserved.",
+    "upload-first-hint": "Upload an image to enable download",
+    "no-image-uploaded": "No image uploaded",
+    "pixelated-preview": "Pixelated preview will appear here"
   },
   zh: {
     title: "图像像素化工具",
@@ -249,7 +252,10 @@ export const translations = {
     "footer-privacy": "隐私政策",
     "footer-terms": "服务条款",
     "footer-contact": "联系",
-    "footer-rights": "版权所有。"
+    "footer-rights": "版权所有。",
+    "upload-first-hint": "请上传图片以启用下载功能",
+    "no-image-uploaded": "未上传任何图片",
+    "pixelated-preview": "像素化预览将在此处显示"
   },
   es: {
     title: "Pixelador de Imágenes",

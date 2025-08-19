@@ -368,9 +368,11 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <div
-                            class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">8-bit Game Style</span>
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/8-bitGameStyle.webp" type="image/webp">
+                                <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style" class="w-full h-full object-cover">
+                            </picture>
                         </div>
                         <div class="p-6">
                             <h3 class="font-semibold mb-2" data-i18n="example-1-title">Retro Gaming</h3>
@@ -383,9 +385,11 @@
                     </div>
 
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <div
-                            class="h-48 bg-gradient-to-br from-green-400 to-brown-500 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">Minecraft Style</span>
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/MinecraftStyle.webp" type="image/webp">
+                                <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style" class="w-full h-full object-cover">
+                            </picture>
                         </div>
                         <div class="p-6">
                             <h3 class="font-semibold mb-2" data-i18n="example-2-title">Block Art</h3>
@@ -398,9 +402,11 @@
                     </div>
 
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <div
-                            class="h-48 bg-gradient-to-br from-pink-400 to-orange-500 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">Mosaic Art</span>
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/MosaicArt.webp" type="image/webp">
+                                <img src="/asset/example/MosaicArt.png" alt="Mosaic Art" class="w-full h-full object-cover">
+                            </picture>
                         </div>
                         <div class="p-6">
                             <h3 class="font-semibold mb-2" data-i18n="example-3-title">Artistic Effect</h3>
@@ -424,13 +430,13 @@
 
         <!-- 8. FAQ Section -->
         <section id="faq" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="faq-title">Frequently Asked Questions About Image Pixelator</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-i18n="faq-subtitle">Learn more about our pixel art converter and how to create amazing pixel art</p>
                 </div>
                 
-                <div class="max-w-3xl mx-auto space-y-6">
+                <div class="max-w-4xl mx-auto space-y-6">
                     <div class="bg-gray-50 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q1">What is an image to pixel art converter?</h3>
                         <p class="text-gray-600" data-i18n="faq-a1">An image to pixel art converter is a powerful tool that transforms regular digital photos into retro-style pixel art. Our Image Pixelator uses advanced algorithms to reduce image resolution while preserving key visual elements, creating authentic pixel art perfect for game sprites, retro designs, and creative projects. This pixel art converter is the easiest way to turn your images into nostalgic 8-bit masterpieces.</p>
@@ -633,6 +639,77 @@
     </footer>
 
     <script type="module" src="/src/main.js"></script>
+    
+    <script>
+        // 处理从示例页面传递的参数
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imageUrl = urlParams.get('image');
+            const pixelSize = urlParams.get('pixelSize');
+            const colorMode = urlParams.get('colorMode');
+            const edgeMode = urlParams.get('edgeMode');
+            
+            if (imageUrl) {
+                // 等待页面完全加载后再处理参数
+                window.addEventListener('load', function() {
+                    // 触发图像加载
+                    const img = new Image();
+                    img.crossOrigin = 'Anonymous';
+                    img.onload = function() {
+                        // 创建File对象
+                        fetch(imageUrl)
+                            .then(response => response.blob())
+                            .then(blob => {
+                                const file = new File([blob], "example-image.png", {type: blob.type});
+                                
+                                // 触发文件处理
+                                const dataTransfer = new DataTransfer();
+                                dataTransfer.items.add(file);
+                                
+                                const fileInput = document.getElementById('fileInput');
+                                if (fileInput) {
+                                    fileInput.files = dataTransfer.files;
+                                    // 创建并触发change事件
+                                    const event = new Event('change', { bubbles: true });
+                                    fileInput.dispatchEvent(event);
+                                }
+                            });
+                    };
+                    img.src = imageUrl;
+                });
+            }
+            
+            // 设置像素大小
+            if (pixelSize) {
+                window.addEventListener('load', function() {
+                    const pixelSizeInput = document.getElementById('pixelSize');
+                    if (pixelSizeInput) {
+                        pixelSizeInput.value = pixelSize;
+                    }
+                });
+            }
+            
+            // 设置颜色模式
+            if (colorMode) {
+                window.addEventListener('load', function() {
+                    const colorModeSelect = document.getElementById('colorMode');
+                    if (colorModeSelect) {
+                        colorModeSelect.value = colorMode;
+                    }
+                });
+            }
+            
+            // 设置边缘处理模式
+            if (edgeMode) {
+                window.addEventListener('load', function() {
+                    const edgeModeSelect = document.getElementById('edgeMode');
+                    if (edgeModeSelect) {
+                        edgeModeSelect.value = edgeMode;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
