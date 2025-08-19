@@ -11,7 +11,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/LOGO.png">
 
     <!-- Language alternatives -->
     <link rel="alternate" hreflang="en" href="/en/index.html">
@@ -114,44 +114,44 @@
                         <!-- Example Images -->
                         <div class="mb-6">
                             <!-- <h3 class="text-lg font-bold mb-3 text-gray-800">Example Images</h3> -->
-                            <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/8-bitGameStyle.png">
+                                    data-src="8-bitGameStyle.png">
                                     <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/MinecraftStyle.png">
+                                    data-src="MinecraftStyle.png">
                                     <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/MosaicArt.png">
+                                    data-src="MosaicArt.png">
                                     <img src="/asset/example/MosaicArt.png" alt="Mosaic Art"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/VintagePhotoEffect.png">
+                                    data-src="VintagePhotoEffect.png">
                                     <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/example4.png">
+                                    data-src="example4.png">
                                     <img src="/asset/example/example4.png" alt="8-bit Game Style"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/example3.png">
+                                    data-src="example3.png">
                                     <img src="/asset/example/example3.png" alt="8-bit Game Style"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/example2.png">
+                                    data-src="example2.png">
                                     <img src="/asset/example/example2.png" alt="8-bit Game Style"
                                         class="aspect-square object-cover">
                                 </div>
                                 <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
-                                    data-src="/asset/example/example1.png">
+                                    data-src="example1.png">
                                     <img src="/asset/example/example1.png" alt="8-bit Game Style"
                                         class="aspect-square object-cover">
                                 </div>
@@ -807,11 +807,11 @@
 
             // 加载示例图片到dropZone
             function loadExampleImage(imageUrl) {
-                // 使用绝对路径确保在不同环境下都能正确加载图片
-                const absoluteImageUrl = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `https://image-pixelator.com/asset/example/${imageUrl}`;
+                // 构建完整的图片URL路径
+                const fullImageUrl = `/asset/example/${imageUrl}`;
                 
                 // 直接使用fetch API获取图片数据
-                fetch(absoluteImageUrl)
+                fetch(fullImageUrl)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
@@ -835,33 +835,6 @@
                     })
                     .catch(error => {
                         console.error('Error loading example image:', error);
-                        // 如果绝对路径加载失败，尝试使用相对路径
-                        const fallbackUrl = imageUrl.startsWith('/') ? imageUrl : `/asset/example/${imageUrl}`;
-                        fetch(fallbackUrl)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                return response.blob();
-                            })
-                            .then(blob => {
-                                const file = new File([blob], "example-image.png", { type: "image/png" });
-
-                                // 触发文件处理
-                                const dataTransfer = new DataTransfer();
-                                dataTransfer.items.add(file);
-
-                                const fileInput = document.getElementById('imageInput');
-                                if (fileInput) {
-                                    fileInput.files = dataTransfer.files;
-                                    // 创建并触发change事件
-                                    const event = new Event('change', { bubbles: true });
-                                    fileInput.dispatchEvent(event);
-                                }
-                            })
-                            .catch(fallbackError => {
-                                console.error('Error loading example image with fallback:', fallbackError);
-                            });
                     });
             }
 
@@ -879,9 +852,9 @@
                     img.crossOrigin = 'Anonymous';
                     img.onload = function () {
                         // 创建File对象
-                        const absoluteImageUrl = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `https://image-pixelator.com/asset/example/${imageUrl}`;
+                        const fullImageUrl = `/asset/example/${imageUrl}`;
                         
-                        fetch(absoluteImageUrl)
+                        fetch(fullImageUrl)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -910,7 +883,7 @@
                                 console.error('Error loading example image:', error);
                             });
                     };
-                    img.src = imageUrl.startsWith('/') ? `https://image-pixelator.com${imageUrl}` : `/asset/example/${imageUrl}`;
+                    img.src = `/asset/example/${imageUrl}`;
                 });
             }
         });
