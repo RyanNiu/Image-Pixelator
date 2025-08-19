@@ -99,42 +99,62 @@
                             <!-- Original (with integrated upload) -->
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="original-image">Original Image</h3>
-                                    <button id="zoomOriginal" class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="original-image">Original
+                                        Image</h3>
+                                    <button id="zoomOriginal"
+                                        class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
                                 </div>
-                                <div id="dropZone" class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer group overflow-hidden flex items-center justify-center">
-                                    <canvas id="originalCanvas" class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                <div id="dropZone"
+                                    class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer group overflow-hidden flex items-center justify-center">
+                                    <canvas id="originalCanvas"
+                                        class="max-w-full max-h-full cursor-pointer hidden"></canvas>
                                     <div id="originalPlaceholder" class="text-center text-gray-400">
-                                        <div class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        <div
+                                            class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                                </path>
                                             </svg>
                                         </div>
-                                        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">Drop your image here or click to browse</p>
-                                        <p class="text-xs text-gray-500" data-i18n="upload-limits">JPG, PNG, WebP • Max 20MB</p>
+                                        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">
+                                            Drop your image here or click to browse</p>
+                                        <p class="text-xs text-gray-500" data-i18n="upload-limits">JPG, PNG, WebP • Max
+                                            20MB</p>
                                     </div>
-                                    <div id="originalOverlay" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                    <div id="originalOverlay"
+                                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
                                         Click to zoom
                                     </div>
                                     <input type="file" id="imageInput" accept="image/*" class="hidden">
                                 </div>
                             </div>
-                            
+
                             <!-- Pixelated -->
                             <div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="pixelated-image">Pixelated Result</h3>
-                                    <button id="zoomPixelated" class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="pixelated-image">Pixelated
+                                        Result</h3>
+                                    <button id="zoomPixelated"
+                                        class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
                                 </div>
-                                <div class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square overflow-hidden flex items-center justify-center">
-                                    <canvas id="pixelatedCanvas" class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                <div
+                                    class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square overflow-hidden flex items-center justify-center">
+                                    <canvas id="pixelatedCanvas"
+                                        class="max-w-full max-h-full cursor-pointer hidden"></canvas>
                                     <div id="pixelatedPlaceholder" class="text-center text-gray-400">
-                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                            </path>
                                         </svg>
-                                        <p class="text-sm" data-i18n="pixelated-preview">Pixelated preview will appear here</p>
+                                        <p class="text-sm" data-i18n="pixelated-preview">Pixelated preview will appear
+                                            here</p>
                                     </div>
-                                    <div id="pixelatedOverlay" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                    <div id="pixelatedOverlay"
+                                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
                                         Click to zoom
                                     </div>
                                 </div>
@@ -145,21 +165,45 @@
                         <div class="mt-6">
                             <!-- <h3 class="text-lg font-bold mb-3 text-gray-800">Example Images</h3> -->
                             <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
-                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
-                                     data-src="/asset/example/8-bitGameStyle.png">
-                                    <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style" class="aspect-square object-cover">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/8-bitGameStyle.png">
+                                    <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style"
+                                        class="aspect-square object-cover">
                                 </div>
-                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
-                                     data-src="/asset/example/MinecraftStyle.png">
-                                    <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style" class="aspect-square object-cover">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/MinecraftStyle.png">
+                                    <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style"
+                                        class="aspect-square object-cover">
                                 </div>
-                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
-                                     data-src="/asset/example/MosaicArt.png">
-                                    <img src="/asset/example/MosaicArt.png" alt="Mosaic Art" class="aspect-square object-cover">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/MosaicArt.png">
+                                    <img src="/asset/example/MosaicArt.png" alt="Mosaic Art"
+                                        class="aspect-square object-cover">
                                 </div>
-                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
-                                     data-src="/asset/example/VintagePhotoEffect.png">
-                                    <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect" class="aspect-square object-cover">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/VintagePhotoEffect.png">
+                                    <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/example4.png">
+                                    <img src="/asset/example/example4.png" alt="8-bit Game Style"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/example3.png">
+                                    <img src="/asset/example/example3.png" alt="8-bit Game Style"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/example2.png">
+                                    <img src="/asset/example/example2.png" alt="8-bit Game Style"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="/asset/example/example1.png">
+                                    <img src="/asset/example/example1.png" alt="8-bit Game Style"
+                                        class="aspect-square object-cover">
                                 </div>
                             </div>
                         </div>
@@ -167,20 +211,23 @@
                         <!-- Function Area -->
                         <div class="mt-6 bg-gray-50 rounded-lg p-6">
                             <!-- <h3 class="text-lg font-bold mb-4" data-i18n="controls-title">Pixelation Settings</h3> -->
-                            
+
                             <!-- Pixel Size -->
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="pixel-size">Pixel Size</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="pixel-size">Pixel
+                                    Size</label>
                                 <div class="flex items-center space-x-4">
                                     <input type="range" id="pixelSize" min="1" max="50" value="8" class="flex-1">
-                                    <span id="pixelSizeValue" class="text-sm font-mono bg-white px-2 py-1 rounded border">8px</span>
+                                    <span id="pixelSizeValue"
+                                        class="text-sm font-mono bg-white px-2 py-1 rounded border">8px</span>
                                 </div>
                             </div>
 
                             <!-- Color Mode & Edge Processing (combined in one line) -->
                             <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="color-mode">Color Mode</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                                        data-i18n="color-mode">Color Mode</label>
                                     <select id="colorMode" class="w-full border rounded px-3 py-2 bg-white">
                                         <option value="original" data-i18n="color-original">Original Colors</option>
                                         <option value="retro" data-i18n="color-retro">Retro 8-bit</option>
@@ -189,9 +236,10 @@
                                         <option value="vibrant" data-i18n="color-vibrant">Vibrant Colors</option>
                                     </select>
                                 </div>
-                                
+
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="edge-processing">Edge Processing</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                                        data-i18n="edge-processing">Edge Processing</label>
                                     <select id="edgeMode" class="w-full border rounded px-3 py-2 bg-white">
                                         <option value="hard" data-i18n="edge-hard">Hard Edges</option>
                                         <option value="soft" data-i18n="edge-soft">Soft Edges</option>
@@ -201,44 +249,67 @@
 
                             <!-- Presets -->
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="presets">Quick Presets</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="presets">Quick
+                                    Presets</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="game" data-i18n="preset-game">8-bit Game</button>
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="arcade" data-i18n="preset-arcade">Arcade</button>
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="avatar" data-i18n="preset-avatar">Avatar</button>
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="minecraft" data-i18n="preset-minecraft">Minecraft</button>
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="mosaic" data-i18n="preset-mosaic">Mosaic</button>
-                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="vintage" data-i18n="preset-vintage">Vintage</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="game" data-i18n="preset-game">8-bit Game</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="arcade" data-i18n="preset-arcade">Arcade</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="avatar" data-i18n="preset-avatar">Avatar</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="minecraft" data-i18n="preset-minecraft">Minecraft</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="mosaic" data-i18n="preset-mosaic">Mosaic</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="vintage" data-i18n="preset-vintage">Vintage</button>
                                 </div>
                             </div>
 
                             <!-- History & Download -->
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="history">History</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                                        data-i18n="history">History</label>
                                     <div class="flex space-x-1">
-                                        <button id="undoBtn" class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50" disabled>
+                                        <button id="undoBtn"
+                                            class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50"
+                                            disabled>
                                             <span data-i18n="undo">↶ Undo</span>
                                         </button>
-                                        <button id="redoBtn" class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50" disabled>
+                                        <button id="redoBtn"
+                                            class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50"
+                                            disabled>
                                             <span data-i18n="redo">↷ Redo</span>
                                         </button>
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="download-format">Format</label>
-                                    <select id="downloadFormat" class="w-full border rounded px-2 py-1 text-xs bg-white">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                                        data-i18n="download-format">Format</label>
+                                    <select id="downloadFormat"
+                                        class="w-full border rounded px-2 py-1 text-xs bg-white">
                                         <option value="png">PNG</option>
                                         <option value="jpg">JPG</option>
                                         <option value="webp">WebP</option>
                                     </select>
                                 </div>
                             </div>
-                            
-                            <button id="downloadBtn" class="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all" disabled>
+
+                            <button id="downloadBtn"
+                                class="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                disabled>
                                 <span data-i18n="download-btn">Download Pixelated Image</span>
                             </button>
-                            <p class="text-xs text-gray-500 mt-2 text-center" data-i18n="upload-first-hint">Upload an image to enable download</p>
+                            <p class="text-xs text-gray-500 mt-2 text-center" data-i18n="upload-first-hint">Upload an
+                                image to enable download</p>
                         </div>
                     </div>
                 </div>
@@ -394,7 +465,8 @@
                         <div class="h-100 flex items-center justify-center">
                             <picture>
                                 <source srcset="/asset/example/8-bitGameStyle.webp" type="image/webp">
-                                <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style" class="w-full h-full object-cover">
+                                <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style"
+                                    class="w-full h-full object-cover">
                             </picture>
                         </div>
                         <div class="p-6">
@@ -411,7 +483,8 @@
                         <div class="h-100 flex items-center justify-center">
                             <picture>
                                 <source srcset="/asset/example/MinecraftStyle.webp" type="image/webp">
-                                <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style" class="w-full h-full object-cover">
+                                <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style"
+                                    class="w-full h-full object-cover">
                             </picture>
                         </div>
                         <div class="p-6">
@@ -428,7 +501,8 @@
                         <div class="h-100 flex items-center justify-center">
                             <picture>
                                 <source srcset="/asset/example/MosaicArt.webp" type="image/webp">
-                                <img src="/asset/example/MosaicArt.png" alt="Mosaic Art" class="w-full h-full object-cover">
+                                <img src="/asset/example/MosaicArt.png" alt="Mosaic Art"
+                                    class="w-full h-full object-cover">
                             </picture>
                         </div>
                         <div class="p-6">
@@ -455,34 +529,64 @@
         <section id="faq" class="py-16 bg-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="faq-title">Frequently Asked Questions About Image Pixelator</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-i18n="faq-subtitle">Learn more about our pixel art converter and how to create amazing pixel art</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="faq-title">Frequently Asked Questions
+                        About Image Pixelator</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-i18n="faq-subtitle">Learn more about our
+                        pixel art converter and how to create amazing pixel art</p>
                 </div>
-                
+
                 <div class="max-w-4xl mx-auto space-y-6">
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q1">What is an image to pixel art converter?</h3>
-                        <p class="text-gray-600" data-i18n="faq-a1">An image to pixel art converter is a powerful tool that transforms regular digital photos into retro-style pixel art. Our Image Pixelator uses advanced algorithms to reduce image resolution while preserving key visual elements, creating authentic pixel art perfect for game sprites, retro designs, and creative projects. This pixel art converter is the easiest way to turn your images into nostalgic 8-bit masterpieces.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q1">What is an image to
+                            pixel art converter?</h3>
+                        <p class="text-gray-600" data-i18n="faq-a1">An image to pixel art converter is a powerful tool
+                            that transforms regular digital photos into retro-style pixel art. Our Image Pixelator uses
+                            advanced algorithms to reduce image resolution while preserving key visual elements,
+                            creating authentic pixel art perfect for game sprites, retro designs, and creative projects.
+                            This pixel art converter is the easiest way to turn your images into nostalgic 8-bit
+                            masterpieces.</p>
                     </div>
-                    
+
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q2">How does the pixel art maker work?</h3>
-                        <p class="text-gray-600" data-i18n="faq-a2">Our pixel art maker works by processing your uploaded image through our sophisticated pixelation engine. With our image pixel converter, you can easily adjust the pixel size, choose from various color modes (original, retro 8-bit, grayscale, sepia, vibrant), and select edge processing options. The pixel art converter processes all data directly in your browser for maximum privacy and instant results. This pixelate image tool gives you complete control over your pixel art creation process.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q2">How does the pixel art
+                            maker work?</h3>
+                        <p class="text-gray-600" data-i18n="faq-a2">Our pixel art maker works by processing your
+                            uploaded image through our sophisticated pixelation engine. With our image pixel converter,
+                            you can easily adjust the pixel size, choose from various color modes (original, retro
+                            8-bit, grayscale, sepia, vibrant), and select edge processing options. The pixel art
+                            converter processes all data directly in your browser for maximum privacy and instant
+                            results. This pixelate image tool gives you complete control over your pixel art creation
+                            process.</p>
                     </div>
-                    
+
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q3">Is pixelating images free with this tool?</h3>
-                        <p class="text-gray-600" data-i18n="faq-a3">Yes, our image pixel converter is completely free to use with no hidden costs. You can pixelate images of any size (up to 20MB) without any watermarks or limitations. All pixel art conversion happens in your browser, so there are no server costs or hidden fees. Our pixel art maker allows unlimited conversions, making it the best free tool for creating pixel art from your images.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q3">Is pixelating images
+                            free with this tool?</h3>
+                        <p class="text-gray-600" data-i18n="faq-a3">Yes, our image pixel converter is completely free to
+                            use with no hidden costs. You can pixelate images of any size (up to 20MB) without any
+                            watermarks or limitations. All pixel art conversion happens in your browser, so there are no
+                            server costs or hidden fees. Our pixel art maker allows unlimited conversions, making it the
+                            best free tool for creating pixel art from your images.</p>
                     </div>
-                    
+
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q4">What image formats does the pixel art converter support?</h3>
-                        <p class="text-gray-600" data-i18n="faq-a4">Our pixel art maker supports all major image formats including JPG, PNG, and WebP. The image to pixel art converter maintains the quality of your original image while transforming it into stunning pixel artwork in seconds. Whether you're using our pixelate image tool for game development, social media content, or artistic projects, our pixel art converter handles all popular formats seamlessly.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q4">What image formats does
+                            the pixel art converter support?</h3>
+                        <p class="text-gray-600" data-i18n="faq-a4">Our pixel art maker supports all major image formats
+                            including JPG, PNG, and WebP. The image to pixel art converter maintains the quality of your
+                            original image while transforming it into stunning pixel artwork in seconds. Whether you're
+                            using our pixelate image tool for game development, social media content, or artistic
+                            projects, our pixel art converter handles all popular formats seamlessly.</p>
                     </div>
-                    
+
                     <div class="bg-gray-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q5">Is my privacy protected when I use the pixelate image tool?</h3>
-                        <p class="text-gray-600" data-i18n="faq-a5">Absolutely. Our image pixel converter works entirely in your browser with zero data uploaded to any server. No images leave your device, and no data is stored or tracked. This pixel art converter ensures your privacy while providing professional-quality pixelation results. When you use our pixel art maker, you can be confident that your images and data remain completely private and secure.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="faq-q5">Is my privacy protected
+                            when I use the pixelate image tool?</h3>
+                        <p class="text-gray-600" data-i18n="faq-a5">Absolutely. Our image pixel converter works entirely
+                            in your browser with zero data uploaded to any server. No images leave your device, and no
+                            data is stored or tracked. This pixel art converter ensures your privacy while providing
+                            professional-quality pixelation results. When you use our pixel art maker, you can be
+                            confident that your images and data remain completely private and secure.</p>
                     </div>
                 </div>
             </div>
@@ -573,7 +677,11 @@
 
                 <div class="bg-white rounded-xl p-8 shadow-sm">
                     <p class="text-gray-700 mb-6" data-i18n="terms-description">
-                        By using Online Tools you agree to our Terms of Service. All tools are free for personal use but to use them for commercial purposes, you need to get a premium plan. You can't do illegal or shady things with our tools. We may block your access to tools, if we find out you're doing something bad. We're not liable for your actions and we offer no warranty. We may revise our terms at any time.
+                        By using Online Tools you agree to our Terms of Service. All tools are free for personal use but
+                        to use them for commercial purposes, you need to get a premium plan. You can't do illegal or
+                        shady things with our tools. We may block your access to tools, if we find out you're doing
+                        something bad. We're not liable for your actions and we offer no warranty. We may revise our
+                        terms at any time.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -612,7 +720,8 @@
                         <h3 class="text-xl font-bold">Image Pixelator</h3>
                     </div>
                     <p class="text-gray-400 mb-4" data-i18n="footer-description">
-                        Free online tool to convert images to pixel art. Fast, secure, and completely private. The best image to pixel art converter for all your creative projects.
+                        Free online tool to convert images to pixel art. Fast, secure, and completely private. The best
+                        image to pixel art converter for all your creative projects.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors">
@@ -662,31 +771,31 @@
     </footer>
 
     <script type="module" src="/src/main.js"></script>
-    
+
     <script>
         // 处理从示例页面传递的参数
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 处理示例图片点击事件
             const exampleImages = document.querySelectorAll('.example-image');
             exampleImages.forEach(image => {
-                image.addEventListener('click', function() {
+                image.addEventListener('click', function () {
                     const imageUrl = this.getAttribute('data-src');
                     loadExampleImage(imageUrl);
                 });
             });
-            
+
             // 加载示例图片到dropZone
             function loadExampleImage(imageUrl) {
                 // 直接使用fetch API获取图片数据
                 fetch(imageUrl)
                     .then(response => response.blob())
                     .then(blob => {
-                        const file = new File([blob], "example-image.png", {type: "image/png"});
-                        
+                        const file = new File([blob], "example-image.png", { type: "image/png" });
+
                         // 触发文件处理
                         const dataTransfer = new DataTransfer();
                         dataTransfer.items.add(file);
-                        
+
                         const fileInput = document.getElementById('imageInput');
                         if (fileInput) {
                             fileInput.files = dataTransfer.files;
@@ -699,30 +808,30 @@
                         console.error('Error loading example image:', error);
                     });
             }
-            
+
             const urlParams = new URLSearchParams(window.location.search);
             const imageUrl = urlParams.get('image');
             const pixelSize = urlParams.get('pixelSize');
             const colorMode = urlParams.get('colorMode');
             const edgeMode = urlParams.get('edgeMode');
-            
+
             if (imageUrl) {
                 // 等待页面完全加载后再处理参数
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     // 触发图像加载
                     const img = new Image();
                     img.crossOrigin = 'Anonymous';
-                    img.onload = function() {
+                    img.onload = function () {
                         // 创建File对象
                         fetch(imageUrl)
                             .then(response => response.blob())
                             .then(blob => {
-                                const file = new File([blob], "example-image.png", {type: blob.type});
-                                
+                                const file = new File([blob], "example-image.png", { type: blob.type });
+
                                 // 触发文件处理
                                 const dataTransfer = new DataTransfer();
                                 dataTransfer.items.add(file);
-                                
+
                                 const fileInput = document.getElementById('imageInput');
                                 if (fileInput) {
                                     fileInput.files = dataTransfer.files;
@@ -730,7 +839,7 @@
                                     const event = new Event('change', { bubbles: true });
                                     fileInput.dispatchEvent(event);
                                 }
-                                
+
                                 // 清除URL参数
                                 window.history.replaceState({}, document.title, "/");
                             });
@@ -738,30 +847,30 @@
                     img.src = imageUrl;
                 });
             }
-            
+
             // 设置像素大小
             if (pixelSize) {
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     const pixelSizeInput = document.getElementById('pixelSize');
                     if (pixelSizeInput) {
                         pixelSizeInput.value = pixelSize;
                     }
                 });
             }
-            
+
             // 设置颜色模式
             if (colorMode) {
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     const colorModeSelect = document.getElementById('colorMode');
                     if (colorModeSelect) {
                         colorModeSelect.value = colorMode;
                     }
                 });
             }
-            
+
             // 设置边缘处理模式
             if (edgeMode) {
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     const edgeModeSelect = document.getElementById('edgeMode');
                     if (edgeModeSelect) {
                         edgeModeSelect.value = edgeMode;
