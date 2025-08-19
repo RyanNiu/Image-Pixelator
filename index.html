@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Pixelator - #1 Free Online Pixel Art Tool | Multi-language | 100% Free</title>
+    <title>Image Pixelator - #1 100% Free Online Pixel Art Tool | Multi-language</title>
     <meta name="description"
         content="Convert images to pixel art instantly in your browser! No upload required, pure frontend processing, free and privacy-friendly">
     <meta name="keywords" content="Image Pixelator, Pixel Art Generator Online, Convert Image to Pixel Art Free">
@@ -17,6 +17,25 @@
     <link rel="alternate" hreflang="en" href="/en/index.html">
     <link rel="alternate" hreflang="zh" href="/zh/index.html">
     <link rel="alternate" hreflang="es" href="/es/index.html">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J86JS45XHN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-J86JS45XHN');
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "sxbdd5pgec");
+    </script>
 
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
@@ -149,8 +168,12 @@
                                 <div class="flex justify-between items-center mb-2">
                                     <h3 class="text-sm font-medium text-gray-700" data-i18n="original-image">Original
                                         Image</h3>
-                                    <button id="zoomOriginal"
-                                        class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                    <div class="flex items-center space-x-2">
+                                        <button id="zoomOriginal"
+                                            class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                        <button id="removeOriginalImage"
+                                            class="text-xs text-red-600 hover:text-red-800 hidden">🗑️ Remove</button>
+                                    </div>
                                 </div>
                                 <div id="dropZone"
                                     class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer group overflow-hidden flex items-center justify-center">

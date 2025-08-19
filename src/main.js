@@ -31,6 +31,7 @@ class PixelatorApp {
     // File upload
     const dropZone = document.getElementById('dropZone');
     const imageInput = document.getElementById('imageInput');
+    const removeOriginalImageBtn = document.getElementById('removeOriginalImage');
 
     if (dropZone && imageInput) {
       dropZone.addEventListener('click', () => imageInput.click());
@@ -38,6 +39,14 @@ class PixelatorApp {
       dropZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
       dropZone.addEventListener('drop', this.handleDrop.bind(this));
       imageInput.addEventListener('change', this.handleFileSelect.bind(this));
+    }
+
+    // Add remove original image button event listener
+    if (removeOriginalImageBtn) {
+      removeOriginalImageBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event from bubbling to dropZone
+        this.handleRemoveOriginalImage();
+      });
     }
 
     // Add paste event listener to the whole document
@@ -382,6 +391,10 @@ class PixelatorApp {
     if (originalCanvas) originalCanvas.classList.remove('hidden');
     if (pixelatedCanvas) pixelatedCanvas.classList.remove('hidden');
     
+    // Show remove button
+    const removeOriginalImageBtn = document.getElementById('removeOriginalImage');
+    if (removeOriginalImageBtn) removeOriginalImageBtn.classList.remove('hidden');
+    
     // Update container styles - remove flex centering, keep height for canvas display
     const originalContainer = originalCanvas?.parentElement;
     const pixelatedContainer = pixelatedCanvas?.parentElement;
@@ -566,6 +579,93 @@ class PixelatorApp {
       </html>
     `);
     newWindow.document.close();
+  }
+
+  /**
+   * Handle removing the original image
+   */
+  handleRemoveOriginalImage() {
+    // Reset canvases
+    const originalCanvas = document.getElementById('originalCanvas');
+    const pixelatedCanvas = document.getElementById('pixelatedCanvas');
+    
+    if (originalCanvas) {
+      const ctx = originalCanvas.getContext('2d');
+      ctx.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
+      originalCanvas.classList.add('hidden');
+    }
+    
+    if (pixelatedCanvas) {
+      const ctx = pixelatedCanvas.getContext('2d');
+      ctx.clearRect(0, 0, pixelatedCanvas.width, pixelatedCanvas.height);
+      pixelatedCanvas.classList.add('hidden');
+    }
+    
+    // Show placeholders again
+    const originalPlaceholder = document.getElementById('originalPlaceholder');
+    const pixelatedPlaceholder = document.getElementById('pixelatedPlaceholder');
+    
+    if (originalPlaceholder) {
+      originalPlaceholder.classList.remove('hidden');
+      // Reset to original upload prompt
+      originalPlaceholder.innerHTML = `
+        <div class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+          </svg>
+        </div>
+        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">${this.i18n.t('upload-prompt')}</p>
+        <p class="text-xs text-gray-500" data-i18n="upload-limits">${this.i18n.t('upload-limits')}</p>
+      `;
+    }
+    
+    if (pixelatedPlaceholder) {
+      pixelatedPlaceholder.classList.remove('hidden');
+      // Reset to original pixelated placeholder
+      pixelatedPlaceholder.innerHTML = `
+        <div class="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+        </div>
+        <p class="text-sm font-semibold text-gray-700" data-i18n="pixelated-preview">${this.i18n.t('pixelated-preview')}</p>
+      `;
+    }
+    
+    // Hide zoom buttons
+    const zoomOriginalBtn = document.getElementById('zoomOriginal');
+    const zoomPixelatedBtn = document.getElementById('zoomPixelated');
+    if (zoomOriginalBtn) zoomOriginalBtn.classList.add('hidden');
+    if (zoomPixelatedBtn) zoomPixelatedBtn.classList.add('hidden');
+    
+    // Hide remove button
+    const removeOriginalImageBtn = document.getElementById('removeOriginalImage');
+    if (removeOriginalImageBtn) removeOriginalImageBtn.classList.add('hidden');
+    
+    // Reset controls
+    document.getElementById('downloadBtn').disabled = true;
+    
+    // Reset image info
+    const imageInfo = document.getElementById('imageInfo');
+    if (imageInfo) imageInfo.classList.add('hidden');
+    
+    // Reset current image
+    this.currentImage = null;
+    
+    // Reset pixelator
+    this.pixelator.imageData = null;
+    
+    // Restore container styles to center placeholders
+    const originalContainer = document.getElementById('dropZone');
+    const pixelatedContainer = document.getElementById('pixelatedCanvas').parentElement;
+    if (originalContainer) {
+      originalContainer.classList.add('flex', 'items-center', 'justify-center');
+      originalContainer.classList.remove('overflow-hidden');
+    }
+    if (pixelatedContainer) {
+      pixelatedContainer.classList.add('flex', 'items-center', 'justify-center');
+      pixelatedContainer.classList.remove('overflow-hidden');
+    }
   }
 
   /**
