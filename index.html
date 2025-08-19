@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Pixelator - Free Online Pixel Art Tool | Multi-language</title>
+    <meta name="description"
+        content="Convert images to pixel art instantly in your browser! No upload required, pure frontend processing, free and privacy-friendly">
+    <meta name="keywords" content="Image Pixelator, Pixel Art Generator Online, Convert Image to Pixel Art Free">
+
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="en" href="/en/index.html">
+    <link rel="alternate" hreflang="zh" href="/zh/index.html">
+    <link rel="alternate" hreflang="es" href="/es/index.html">
+
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- 1. Header -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- a. Logo -->
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">P</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900" data-i18n="title">Image Pixelator</h1>
+                </div>
+
+                <!-- b. Navigation Menu & c. Language Switch -->
+                <div class="flex items-center space-x-6">
+                    <nav class="hidden md:flex items-center space-x-4">
+                        <a href="#how-to-use" class="text-gray-600 hover:text-blue-600 text-sm font-medium"
+                            data-i18n="nav-how-to">How to Use</a>
+                        <a href="#examples" class="text-gray-600 hover:text-blue-600 text-sm font-medium"
+                            data-i18n="nav-examples">Examples</a>
+                        <a href="#privacy" class="text-gray-600 hover:text-blue-600 text-sm font-medium"
+                            data-i18n="nav-privacy">Privacy</a>
+                    </nav>
+                    <div class="language-selector">
+                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="zh">🇨🇳 中文</option>
+                            <option value="es">🇪🇸 Español</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Title Area -->
+        <section class="bg-gradient-to-br from-blue-50 to-purple-50 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <!-- a. Main Title -->
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                        data-i18n="hero-title">
+                        Image Pixelator
+                    </span>
+                </h1>
+
+                <!-- b. Subtitle -->
+                <p class="text-xl md:text-2xl text-gray-600 mb-6" data-i18n="hero-subtitle">
+                    Transform your photos into stunning pixel art
+                </p>
+
+                <!-- c. Feature Description -->
+                <p class="text-lg text-gray-500 mb-4 max-w-3xl mx-auto" data-i18n="hero-description">
+                    Free online tool that converts images to pixel art instantly in your browser.
+                    No upload required, completely private, and supports multiple formats.
+                </p>
+
+                <!-- Privacy Notice -->
+                <div
+                    class="inline-flex items-center bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span data-i18n="privacy-badge">100% Private - Processing happens in your browser</span>
+                </div>
+
+                <!-- 4. Function Module (moved from below) -->
+                <div id="upload" class="mt-4">
+                    <!-- Preview Area -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <!-- <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold" data-i18n="preview-title">Real-time Preview</h3>
+                        </div> -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Original (with integrated upload) -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="original-image">Original Image</h3>
+                                    <button id="zoomOriginal" class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                </div>
+                                <div id="dropZone" class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer group overflow-hidden flex items-center justify-center">
+                                    <canvas id="originalCanvas" class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                    <div id="originalPlaceholder" class="text-center text-gray-400">
+                                        <div class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">Drop your image here or click to browse</p>
+                                        <p class="text-xs text-gray-500" data-i18n="upload-limits">JPG, PNG, WebP • Max 20MB</p>
+                                    </div>
+                                    <div id="originalOverlay" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                        Click to zoom
+                                    </div>
+                                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                                </div>
+                            </div>
+                            
+                            <!-- Pixelated -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-sm font-medium text-gray-700" data-i18n="pixelated-image">Pixelated Result</h3>
+                                    <button id="zoomPixelated" class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                </div>
+                                <div class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square overflow-hidden flex items-center justify-center">
+                                    <canvas id="pixelatedCanvas" class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                    <div id="pixelatedPlaceholder" class="text-center text-gray-400">
+                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        </svg>
+                                        <p class="text-sm" data-i18n="pixelated-preview">Pixelated preview will appear here</p>
+                                    </div>
+                                    <div id="pixelatedOverlay" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                        Click to zoom
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Function Area -->
+                        <div class="mt-6 bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-lg font-bold mb-4" data-i18n="controls-title">Pixelation Settings</h3>
+                            
+                            <!-- Pixel Size -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="pixel-size">Pixel Size</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" id="pixelSize" min="1" max="50" value="8" class="flex-1">
+                                    <span id="pixelSizeValue" class="text-sm font-mono bg-white px-2 py-1 rounded border">8px</span>
+                                </div>
+                            </div>
+
+                            <!-- Color Mode & Edge Processing (combined in one line) -->
+                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="color-mode">Color Mode</label>
+                                    <select id="colorMode" class="w-full border rounded px-3 py-2 bg-white">
+                                        <option value="original" data-i18n="color-original">Original Colors</option>
+                                        <option value="retro" data-i18n="color-retro">Retro 8-bit</option>
+                                        <option value="grayscale" data-i18n="color-grayscale">Grayscale</option>
+                                        <option value="sepia" data-i18n="color-sepia">Sepia Tone</option>
+                                        <option value="vibrant" data-i18n="color-vibrant">Vibrant Colors</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="edge-processing">Edge Processing</label>
+                                    <select id="edgeMode" class="w-full border rounded px-3 py-2 bg-white">
+                                        <option value="hard" data-i18n="edge-hard">Hard Edges</option>
+                                        <option value="soft" data-i18n="edge-soft">Soft Edges</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Presets -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="presets">Quick Presets</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="game" data-i18n="preset-game">8-bit Game</button>
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="arcade" data-i18n="preset-arcade">Arcade</button>
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="avatar" data-i18n="preset-avatar">Avatar</button>
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="minecraft" data-i18n="preset-minecraft">Minecraft</button>
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="mosaic" data-i18n="preset-mosaic">Mosaic</button>
+                                    <button class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors" data-preset="vintage" data-i18n="preset-vintage">Vintage</button>
+                                </div>
+                            </div>
+
+                            <!-- History & Download -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="history">History</label>
+                                    <div class="flex space-x-1">
+                                        <button id="undoBtn" class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50" disabled>
+                                            <span data-i18n="undo">↶ Undo</span>
+                                        </button>
+                                        <button id="redoBtn" class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50" disabled>
+                                            <span data-i18n="redo">↷ Redo</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="download-format">Format</label>
+                                    <select id="downloadFormat" class="w-full border rounded px-2 py-1 text-xs bg-white">
+                                        <option value="png">PNG</option>
+                                        <option value="jpg">JPG</option>
+                                        <option value="webp">WebP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button id="downloadBtn" class="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all" disabled>
+                                <span data-i18n="download-btn">Download Pixelated Image</span>
+                            </button>
+                            <p class="text-xs text-gray-500 mt-2 text-center" data-i18n="upload-first-hint">Upload an image to enable download</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How to Use Steps -->
+        <section id="how-to-use" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="how-it-works">How It Works</h2>
+                    <p class="text-lg text-gray-600" data-i18n="how-it-works-desc">Simple 3-step process to create
+                        amazing pixel art</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3" data-i18n="step-1-title">Upload Image</h3>
+                        <p class="text-gray-600" data-i18n="step-1-desc">Choose any JPG, PNG, or WebP image from your
+                            device. Drag & drop or click to browse.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3" data-i18n="step-2-title">Customize Settings</h3>
+                        <p class="text-gray-600" data-i18n="step-2-desc">Adjust pixel size, choose color modes, and
+                            apply preset effects for different styles.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3" data-i18n="step-3-title">Download Result</h3>
+                        <p class="text-gray-600" data-i18n="step-3-desc">Get your pixelated image in high quality PNG,
+                            JPG, or WebP format.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 5. Detailed Introduction -->
+        <section id="features" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="features-title">Powerful Features</h2>
+                    <p class="text-lg text-gray-600" data-i18n="features-desc">Everything you need to create stunning
+                        pixel art</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="text-center p-6 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-1-title">Multiple Formats</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-1-desc">Support for JPG, PNG, WebP input and
+                            output formats</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-2-title">Real-time Preview</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-2-desc">See changes instantly as you adjust
+                            settings</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-green-50 hover:bg-green-100 transition-colors">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-3-title">100% Private</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-3-desc">All processing happens in your
+                            browser, no data sent to servers</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-yellow-50 hover:bg-yellow-100 transition-colors">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-4-title">Lightning Fast</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-4-desc">Instant processing with optimized
+                            algorithms</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-red-50 hover:bg-red-100 transition-colors">
+                        <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-5-title">Smart Presets</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-5-desc">6 built-in presets for different art
+                            styles</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-indigo-50 hover:bg-indigo-100 transition-colors">
+                        <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" data-i18n="feature-6-title">Multi-language</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="feature-6-desc">Available in English, Chinese, and
+                            Spanish</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Examples & Tips -->
+        <section id="examples" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="examples-title">Examples & Tips</h2>
+                    <p class="text-lg text-gray-600" data-i18n="examples-desc">See what you can create with different
+                        settings</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div
+                            class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">8-bit Game Style</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2" data-i18n="example-1-title">Retro Gaming</h3>
+                            <p class="text-gray-600 text-sm mb-3" data-i18n="example-1-desc">Perfect for creating game
+                                sprites and retro artwork</p>
+                            <div class="text-xs text-gray-500">
+                                <span data-i18n="settings">Settings:</span> 12px • Retro 8-bit • Hard edges
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div
+                            class="h-48 bg-gradient-to-br from-green-400 to-brown-500 flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">Minecraft Style</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2" data-i18n="example-2-title">Block Art</h3>
+                            <p class="text-gray-600 text-sm mb-3" data-i18n="example-2-desc">Create textures that fit
+                                perfectly in Minecraft</p>
+                            <div class="text-xs text-gray-500">
+                                <span data-i18n="settings">Settings:</span> 16px • Retro 8-bit • Hard edges
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div
+                            class="h-48 bg-gradient-to-br from-pink-400 to-orange-500 flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">Mosaic Art</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2" data-i18n="example-3-title">Artistic Effect</h3>
+                            <p class="text-gray-600 text-sm mb-3" data-i18n="example-3-desc">Beautiful mosaic-style
+                                artwork with soft edges</p>
+                            <div class="text-xs text-gray-500">
+                                <span data-i18n="settings">Settings:</span> 6px • Original • Soft edges
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="/examples.html"
+                        class="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors border">
+                        <span data-i18n="view-all-examples">View All Examples →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Privacy Policy -->
+        <section id="privacy" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="privacy-title">Privacy Policy</h2>
+                    <p class="text-lg text-gray-600" data-i18n="privacy-subtitle">Your privacy is our priority</p>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-green-900 mb-3" data-i18n="privacy-no-data">We don't
+                                log data</h3>
+                            <p class="text-green-800 mb-4" data-i18n="privacy-description">
+                                All conversions and calculations are done in your browser using JavaScript. We don't
+                                send a single bit about your input data to our servers. There is no server-side
+                                processing at all. We use Google Analytics and StatCounter for site usage analytics.
+                                Your IP address is saved on our web server for additional analytics. The free plan
+                                doesn't use cookies and don't store session information in cookies. The premium and team
+                                plans use cookies to store session information so that you are always logged in. We use
+                                your browser's local storage to save tools' input. It stays on your computer.
+                            </p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm" data-i18n="privacy-local">Local processing
+                                        only</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm" data-i18n="privacy-no-upload">No image
+                                        uploads</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm" data-i18n="privacy-no-storage">No data
+                                        storage</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm" data-i18n="privacy-secure">100% secure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Terms of Service -->
+        <section id="terms" class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="terms-title">Terms of Service</h2>
+                    <p class="text-lg text-gray-600" data-i18n="terms-subtitle">The legal stuff</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <p class="text-gray-700 mb-6" data-i18n="terms-description">
+                        By using Online Tools you agree to our Terms of Service. All tools are free for personal use but
+                        to use them for commercial purposes, you need to get a premium plan. You can't do illegal or
+                        shady things with our tools. We may block your access to tools, if we find out you're doing
+                        something bad. We're not liable for your actions and we offer no warranty. We may revise our
+                        terms at any time.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2" data-i18n="terms-usage">Usage Rights</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li data-i18n="terms-free">• Free for personal use</li>
+                                <li data-i18n="terms-commercial">• Commercial use requires premium</li>
+                                <li data-i18n="terms-legal">• Must comply with laws</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2" data-i18n="terms-limitations">Limitations</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li data-i18n="terms-warranty">• No warranty provided</li>
+                                <li data-i18n="terms-liability">• Limited liability</li>
+                                <li data-i18n="terms-changes">• Terms may change</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 9. Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">P</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Image Pixelator</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4" data-i18n="footer-description">
+                        Free online tool to convert images to pixel art. Fast, secure, and completely private.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4" data-i18n="footer-tools">Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#upload" class="hover:text-white transition-colors"
+                                data-i18n="footer-pixelator">Image Pixelator</a></li>
+                        <li><a href="/examples.html" class="hover:text-white transition-colors"
+                                data-i18n="footer-examples">Examples</a></li>
+                        <li><a href="#how-to-use" class="hover:text-white transition-colors"
+                                data-i18n="footer-guide">User Guide</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4" data-i18n="footer-legal">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#privacy" class="hover:text-white transition-colors"
+                                data-i18n="footer-privacy">Privacy Policy</a></li>
+                        <li><a href="#terms" class="hover:text-white transition-colors" data-i18n="footer-terms">Terms
+                                of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors"
+                                data-i18n="footer-contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Image Pixelator. <span data-i18n="footer-rights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
