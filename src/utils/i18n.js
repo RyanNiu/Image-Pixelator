@@ -112,6 +112,7 @@ export class I18nManager {
    */
   init() {
     this.updatePageTexts();
+    this.updateLanguageSelector();
     this.setupLanguageSelector();
   }
 

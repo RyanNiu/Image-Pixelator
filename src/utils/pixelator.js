@@ -57,29 +57,34 @@ export class ImagePixelator {
     this.originalCtx = this.originalCanvas.getContext('2d');
     this.pixelatedCtx = this.pixelatedCanvas.getContext('2d');
 
-    // Set canvas dimensions to 1:1 square (400x400)
-    const displaySize = 400;
+    // Set canvas dimensions to match image dimensions (maintaining aspect ratio)
+    const maxWidth = 800; // Maximum display width
+    const maxHeight = 600; // Maximum display height
     
-    this.originalCanvas.width = displaySize;
-    this.originalCanvas.height = displaySize;
-    this.pixelatedCanvas.width = displaySize;
-    this.pixelatedCanvas.height = displaySize;
+    // Calculate display dimensions while maintaining aspect ratio
+    let displayWidth = img.width;
+    let displayHeight = img.height;
+    
+    if (displayWidth > maxWidth || displayHeight > maxHeight) {
+      const scale = Math.min(maxWidth / displayWidth, maxHeight / displayHeight);
+      displayWidth = Math.floor(displayWidth * scale);
+      displayHeight = Math.floor(displayHeight * scale);
+    }
+    
+    this.originalCanvas.width = displayWidth;
+    this.originalCanvas.height = displayHeight;
+    this.pixelatedCanvas.width = displayWidth;
+    this.pixelatedCanvas.height = displayHeight;
 
-    // Draw original image centered
-    this.originalCtx.clearRect(0, 0, displaySize, displaySize);
+    // Draw original image
+    this.originalCtx.clearRect(0, 0, displayWidth, displayHeight);
     this.originalCtx.fillStyle = '#f9fafb';
-    this.originalCtx.fillRect(0, 0, displaySize, displaySize);
+    this.originalCtx.fillRect(0, 0, displayWidth, displayHeight);
     
-    const scale = Math.min(displaySize / img.width, displaySize / img.height);
-    const scaledWidth = img.width * scale;
-    const scaledHeight = img.height * scale;
-    const x = (displaySize - scaledWidth) / 2;
-    const y = (displaySize - scaledHeight) / 2;
-    
-    this.originalCtx.drawImage(img, x, y, scaledWidth, scaledHeight);
+    this.originalCtx.drawImage(img, 0, 0, displayWidth, displayHeight);
     
     // Store original image data for processing
-    this.imageData = this.originalCtx.getImageData(0, 0, displaySize, displaySize);
+    this.imageData = this.originalCtx.getImageData(0, 0, displayWidth, displayHeight);
   }
 
   /**

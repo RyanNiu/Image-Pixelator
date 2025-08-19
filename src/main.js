@@ -40,6 +40,9 @@ class PixelatorApp {
       imageInput.addEventListener('change', this.handleFileSelect.bind(this));
     }
 
+    // Add paste event listener to the whole document
+    document.addEventListener('paste', this.handlePaste.bind(this));
+
     // Controls
     const pixelSize = document.getElementById('pixelSize');
     const colorMode = document.getElementById('colorMode');
@@ -70,6 +73,29 @@ class PixelatorApp {
     const zoomPixelated = document.getElementById('zoomPixelated');
     if (zoomOriginal) zoomOriginal.addEventListener('click', this.handleZoomOriginal.bind(this));
     if (zoomPixelated) zoomPixelated.addEventListener('click', this.handleZoomPixelated.bind(this));
+  }
+
+  /**
+   * Handle paste event
+   */
+  handlePaste(e) {
+    // Get clipboard items
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    
+    // Look for image data
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        // Get blob of image data
+        const blob = items[i].getAsFile();
+        
+        // Process the image
+        if (blob) {
+          this.processFile(blob);
+          e.preventDefault();
+          return;
+        }
+      }
+    }
   }
 
   /**
