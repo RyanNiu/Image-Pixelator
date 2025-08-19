@@ -141,6 +141,29 @@
                             </div>
                         </div>
 
+                        <!-- Example Images -->
+                        <div class="mt-6">
+                            <!-- <h3 class="text-lg font-bold mb-3 text-gray-800">Example Images</h3> -->
+                            <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
+                                     data-src="/asset/example/8-bitGameStyle.png">
+                                    <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style" class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
+                                     data-src="/asset/example/MinecraftStyle.png">
+                                    <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style" class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
+                                     data-src="/asset/example/MosaicArt.png">
+                                    <img src="/asset/example/MosaicArt.png" alt="Mosaic Art" class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all" 
+                                     data-src="/asset/example/VintagePhotoEffect.png">
+                                    <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect" class="aspect-square object-cover">
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Function Area -->
                         <div class="mt-6 bg-gray-50 rounded-lg p-6">
                             <!-- <h3 class="text-lg font-bold mb-4" data-i18n="controls-title">Pixelation Settings</h3> -->
@@ -643,6 +666,40 @@
     <script>
         // 处理从示例页面传递的参数
         document.addEventListener('DOMContentLoaded', function() {
+            // 处理示例图片点击事件
+            const exampleImages = document.querySelectorAll('.example-image');
+            exampleImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    const imageUrl = this.getAttribute('data-src');
+                    loadExampleImage(imageUrl);
+                });
+            });
+            
+            // 加载示例图片到dropZone
+            function loadExampleImage(imageUrl) {
+                // 直接使用fetch API获取图片数据
+                fetch(imageUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const file = new File([blob], "example-image.png", {type: "image/png"});
+                        
+                        // 触发文件处理
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        
+                        const fileInput = document.getElementById('imageInput');
+                        if (fileInput) {
+                            fileInput.files = dataTransfer.files;
+                            // 创建并触发change事件
+                            const event = new Event('change', { bubbles: true });
+                            fileInput.dispatchEvent(event);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading example image:', error);
+                    });
+            }
+            
             const urlParams = new URLSearchParams(window.location.search);
             const imageUrl = urlParams.get('image');
             const pixelSize = urlParams.get('pixelSize');
@@ -666,13 +723,16 @@
                                 const dataTransfer = new DataTransfer();
                                 dataTransfer.items.add(file);
                                 
-                                const fileInput = document.getElementById('fileInput');
+                                const fileInput = document.getElementById('imageInput');
                                 if (fileInput) {
                                     fileInput.files = dataTransfer.files;
                                     // 创建并触发change事件
                                     const event = new Event('change', { bubbles: true });
                                     fileInput.dispatchEvent(event);
                                 }
+                                
+                                // 清除URL参数
+                                window.history.replaceState({}, document.title, "/");
                             });
                     };
                     img.src = imageUrl;
