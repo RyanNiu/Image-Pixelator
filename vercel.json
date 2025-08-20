@@ -1,17 +1,15 @@
 {
   "version": 2,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "^/$", "dest": "/index.html" },
-    { "src": "^/en/?$", "dest": "/en/index.html" },
-    { "src": "^/zh/?$", "dest": "/zh/index.html" },
-    { "src": "^/es/?$", "dest": "/es/index.html" },
-    { "src": "^/examples.html$", "dest": "/examples.html" },
-    { "src": "^/en/examples.html$", "dest": "/en/examples.html" },
-    { "src": "^/zh/examples.html$", "dest": "/zh/examples.html" },
-    { "src": "^/es/examples.html$", "dest": "/es/examples.html" },
-    { "src": "^/asset/(.*)$", "dest": "/asset/$1" },
-    { "src": "^/(.*)$", "dest": "/$1" }
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/en", "destination": "/en/index.html" },
+    { "source": "/zh", "destination": "/zh/index.html" },
+    { "source": "/es", "destination": "/es/index.html" },
+    { "source": "/asset/:path*", "destination": "/asset/:path*" }
   ],
-  "trailingSlash": false
+  "redirects": [
+    { "source": "/en/", "destination": "/en", "permanent": true },
+    { "source": "/zh/", "destination": "/zh", "permanent": true },
+    { "source": "/es/", "destination": "/es", "permanent": true }
+  ]
 }
