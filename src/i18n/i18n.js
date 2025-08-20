@@ -1,11 +1,15 @@
 import en from './translations/en.js';
 import zh from './translations/zh.js';
 import es from './translations/es.js';
+import fr from './translations/fr.js';
+import ru from './translations/ru.js';
 
 const translations = {
   en,
   zh,
-  es
+  es,
+  fr,
+  ru
 };
 
 export class I18nManager {
@@ -40,7 +44,7 @@ export class I18nManager {
 
   getLanguageFromURL() {
     const path = window.location.pathname;
-    const langMatch = path.match(/^\/(en|zh|es)\//);
+    const langMatch = path.match(/^\/(en|zh|es|fr|ru)\//);
     return langMatch ? langMatch[1] : null;
   }
 
@@ -69,8 +73,8 @@ export class I18nManager {
     const origin = window.location.origin;
     
     // If already in a language path, replace it
-    if (path.startsWith('/en/') || path.startsWith('/zh/') || path.startsWith('/es/')) {
-      const newPath = path.replace(/^\/(en|zh|es)\//, `/${lang}/`);
+    if (path.startsWith('/en/') || path.startsWith('/zh/') || path.startsWith('/es/') || path.startsWith('/fr/') || path.startsWith('/ru/')) {
+      const newPath = path.replace(/^\/(en|zh|es|fr|ru)\//, `/${lang}/`);
       window.history.pushState({}, '', origin + newPath + window.location.search + window.location.hash);
     } else {
       // Add language prefix

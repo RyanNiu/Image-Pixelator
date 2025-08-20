@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="examples-title">Examples - Image Pixelator</title>
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
+
 <body class="bg-gray-50 min-h-screen">
     <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,10 +16,13 @@
                 <div class="flex items-center space-x-4">
                     <a href="/en/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
                     <div class="language-selector">
-                        <select id="languageSelect" class="border rounded px-2 py-1 text-sm" onchange="window.location.href=this.value">
-                            <option value="/en/examples.html">🇺🇸 English</option>
-                            <option value="/zh/examples.html">🇨🇳 中文</option>
-                            <option value="/es/examples.html">🇪🇸 Español</option>
+                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm"
+                            onchange="window.location.href=this.value">
+                            <option value="/en/" selected>🇺🇸 English</option>
+                            <option value="/zh/">🇨🇳 中文</option>
+                            <option value="/es/">🇪🇸 Español</option>
+                            <option value="/fr/">🇫🇷 Français</option>
+                            <option value="/ru/">🇷🇺 Русский</option>
                         </select>
                     </div>
                 </div>
@@ -43,11 +48,15 @@
                         Perfect for game sprites and nostalgic artwork.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="pixel-size">Pixel Size: 12px</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm" data-i18n="color-retro">Retro Color Mode</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm" data-i18n="edge-hard">Hard Edges</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                            data-i18n="pixel-size">Pixel Size: 12px</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                            data-i18n="color-retro">Retro Color Mode</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                            data-i18n="edge-hard">Hard Edges</span>
                     </div>
-                    <button class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    <button
+                        class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                         data-image="8-bitGameStyle.png" data-i18n="try-this-style">
                         Try This Style
                     </button>
@@ -55,11 +64,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="original">Original</p>
-                        <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style Original" class="w-72 h-72 object-cover rounded">
+                        <img src="/asset/example/8-bitGameStyle.png" alt="8-bit Game Style Original"
+                            class="w-72 h-72 object-cover rounded">
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result</p>
-                        <img src="/asset/example/8-bitGameStyle.webp" alt="8-bit Game Style Result" class="w-72 h-72 object-cover rounded">
+                        <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result
+                        </p>
+                        <img src="/asset/example/8-bitGameStyle.webp" alt="8-bit Game Style Result"
+                            class="w-72 h-72 object-cover rounded">
                     </div>
                 </div>
             </div>
@@ -72,11 +84,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="original">Original</p>
-                            <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style Original" class="w-72 h-72 object-cover rounded">
+                            <img src="/asset/example/MinecraftStyle.png" alt="Minecraft Style Original"
+                                class="w-72 h-72 object-cover rounded">
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result</p>
-                            <img src="/asset/example/MinecraftStyle.webp" alt="Minecraft Style Result" class="w-72 h-72 object-cover rounded">
+                            <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated
+                                Result</p>
+                            <img src="/asset/example/MinecraftStyle.webp" alt="Minecraft Style Result"
+                                class="w-72 h-72 object-cover rounded">
                         </div>
                     </div>
                 </div>
@@ -87,11 +102,15 @@
                         Great for character designs and landscape art.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="pixel-size-16">Pixel Size: 16px</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm" data-i18n="color-retro">Retro Color Mode</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm" data-i18n="edge-hard">Hard Edges</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                            data-i18n="pixel-size-16">Pixel Size: 16px</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                            data-i18n="color-retro">Retro Color Mode</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                            data-i18n="edge-hard">Hard Edges</span>
                     </div>
-                    <button class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    <button
+                        class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                         data-image="MinecraftStyle.png" data-i18n="try-this-style">
                         Try This Style
                     </button>
@@ -109,11 +128,15 @@
                         and abstract compositions.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="pixel-size-6">Pixel Size: 6px</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm" data-i18n="color-original">Original Colors</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm" data-i18n="edge-soft">Soft Edges</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                            data-i18n="pixel-size-6">Pixel Size: 6px</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                            data-i18n="color-original">Original Colors</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                            data-i18n="edge-soft">Soft Edges</span>
                     </div>
-                    <button class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    <button
+                        class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                         data-image="MosaicArt.png" data-i18n="try-this-style">
                         Try This Style
                     </button>
@@ -121,11 +144,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="original">Original</p>
-                        <img src="/asset/example/MosaicArt.png" alt="Mosaic Art Original" class="w-72 h-72 object-cover rounded">
+                        <img src="/asset/example/MosaicArt.png" alt="Mosaic Art Original"
+                            class="w-72 h-72 object-cover rounded">
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result</p>
-                        <img src="/asset/example/MosaicArt.webp" alt="Mosaic Art Result" class="w-72 h-72 object-cover rounded">
+                        <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result
+                        </p>
+                        <img src="/asset/example/MosaicArt.webp" alt="Mosaic Art Result"
+                            class="w-72 h-72 object-cover rounded">
                     </div>
                 </div>
             </div>
@@ -138,11 +164,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="original">Original</p>
-                            <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect Original" class="w-72 h-72 object-cover rounded">
+                            <img src="/asset/example/VintagePhotoEffect.png" alt="Vintage Photo Effect Original"
+                                class="w-72 h-72 object-cover rounded">
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated Result</p>
-                            <img src="/asset/example/VintagePhotoEffect.webp" alt="Vintage Photo Effect Result" class="w-72 h-72 object-cover rounded">
+                            <p class="text-sm text-gray-500 mb-2 text-center" data-i18n="pixelated-result">Pixelated
+                                Result</p>
+                            <img src="/asset/example/VintagePhotoEffect.webp" alt="Vintage Photo Effect Result"
+                                class="w-72 h-72 object-cover rounded">
                         </div>
                     </div>
                 </div>
@@ -153,11 +182,15 @@
                         retro-style portraits and vintage compositions.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="pixel-size-10">Pixel Size: 10px</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm" data-i18n="color-sepia">Sepia Tone</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm" data-i18n="edge-hard">Hard Edges</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                            data-i18n="pixel-size-10">Pixel Size: 10px</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                            data-i18n="color-sepia">Sepia Tone</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                            data-i18n="edge-hard">Hard Edges</span>
                     </div>
-                    <button class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    <button
+                        class="example-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                         data-image="VintagePhotoEffect.png" data-i18n="try-this-style">
                         Try This Style
                     </button>
@@ -171,7 +204,9 @@
             <p class="text-blue-700 mb-6" data-i18n="cta-description">
                 Try our free image pixelator tool and create amazing pixel art from your photos!
             </p>
-            <a href="/" class="inline-block bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium" data-i18n="start-pixelating">
+            <a href="/"
+                class="inline-block bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                data-i18n="start-pixelating">
                 Start Pixelating →
             </a>
         </section>
@@ -187,7 +222,7 @@
 
     <script>
         // 简化的语言切换功能
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const languageSelect = document.getElementById('languageSelect');
             if (languageSelect) {
                 // 从URL参数获取当前语言
@@ -196,20 +231,20 @@
                 if (lang && document.querySelector(`#languageSelect option[value="${lang}"]`)) {
                     languageSelect.value = lang;
                 }
-                
+
                 // 当选择新语言时，将用户重定向到带有语言参数的相同页面
-                languageSelect.addEventListener('change', function(e) {
+                languageSelect.addEventListener('change', function (e) {
                     // 获取当前页面URL并移除现有lang参数（如果有）
                     let currentUrl = window.location.href.split('?')[0];
                     // 添加新的lang参数
                     window.location.href = `${currentUrl}?lang=${e.target.value}`;
                 });
             }
-            
+
             // 处理示例按钮点击
             const exampleButtons = document.querySelectorAll('.example-btn');
             exampleButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const image = this.getAttribute('data-image');
                     // 保留基本的示例功能，移除复杂的参数传递
                     window.location.href = `/?image=${image}`;
@@ -218,4 +253,5 @@
         });
     </script>
 </body>
+
 </html>

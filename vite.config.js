@@ -15,7 +15,11 @@ export default defineConfig({
         'zh/index': resolve(__dirname, 'zh/index.html'),
         'zh/examples': resolve(__dirname, 'zh/examples.html'),
         'es/index': resolve(__dirname, 'es/index.html'),
-        'es/examples': resolve(__dirname, 'es/examples.html')
+        'es/examples': resolve(__dirname, 'es/examples.html'),
+        'fr/index': resolve(__dirname, 'fr/index.html'),
+        'fr/examples': resolve(__dirname, 'fr/examples.html'),
+        'ru/index': resolve(__dirname, 'ru/index.html'),
+        'ru/examples': resolve(__dirname, 'ru/examples.html')
       }
     }
   },

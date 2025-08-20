@@ -22,6 +22,22 @@
       "destination": "/es/index.html"
     },
     {
+      "source": "/fr",
+      "destination": "/fr/index.html"
+    },
+    {
+      "source": "/fr/",
+      "destination": "/fr/index.html"
+    },
+    {
+      "source": "/ru",
+      "destination": "/ru/index.html"
+    },
+    {
+      "source": "/ru/",
+      "destination": "/ru/index.html"
+    },
+    {
       "source": "/examples",
       "destination": "/examples.html"
     },
@@ -36,6 +52,14 @@
     {
       "source": "/es/examples",
       "destination": "/es/examples.html"
+    },
+    {
+      "source": "/fr/examples",
+      "destination": "/fr/examples.html"
+    },
+    {
+      "source": "/ru/examples",
+      "destination": "/ru/examples.html"
     }
   ]
 }

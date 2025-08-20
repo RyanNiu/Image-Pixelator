@@ -77,11 +77,12 @@
                         <a href="#privacy" class="text-gray-600 hover:text-blue-600 text-sm font-medium">Privacy</a>
                     </nav>
                     <div class="language-selector">
-                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm"
-                            onchange="window.location.href=this.value">
+                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm" onchange="window.location.href=this.value">
                             <option value="/en/" selected>🇺🇸 English</option>
                             <option value="/zh/">🇨🇳 中文</option>
                             <option value="/es/">🇪🇸 Español</option>
+                            <option value="/fr/">🇫🇷 Français</option>
+                            <option value="/ru/">🇷🇺 Русский</option>
                         </select>
                     </div>
                 </div>
@@ -772,114 +773,7 @@
     </footer>
     <!-- 引用main.js   -->
     <script type="module" src="../src/main.js"></script>
-    <script>
-        // Simplified language selector behavior
-        const languageSelect = document.getElementById('languageSelect');
-        if (languageSelect) {
-            languageSelect.addEventListener('change', (e) => {
-                window.location.href = e.target.value;
-            });
-        }
-    </script>
     
-    <!-- 引入主要JavaScript文件 -->
-    <script type="module" src="../src/main.js"></script>
-
-    <script>
-        // 处理从示例页面传递的参数
-        document.addEventListener('DOMContentLoaded', function () {
-            // 处理示例图片点击事件
-            const exampleImages = document.querySelectorAll('.example-image');
-            exampleImages.forEach(image => {
-                image.addEventListener('click', function () {
-                    const imageUrl = this.getAttribute('data-src');
-                    loadExampleImage(imageUrl);
-                });
-            });
-
-            // 加载示例图片到dropZone
-            function loadExampleImage(imageUrl) {
-                // 构建完整的图片URL路径
-                const fullImageUrl = `/asset/example/${imageUrl}`;
-
-                // 直接使用fetch API获取图片数据
-                fetch(fullImageUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        const file = new File([blob], "example-image.png", { type: "image/png" });
-
-                        // 触发文件处理
-                        const dataTransfer = new DataTransfer();
-                        dataTransfer.items.add(file);
-
-                        const fileInput = document.getElementById('imageInput');
-                        if (fileInput) {
-                            fileInput.files = dataTransfer.files;
-                            // 创建并触发change事件
-                            const event = new Event('change', { bubbles: true });
-                            fileInput.dispatchEvent(event);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error loading example image:', error);
-                    });
-            }
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const imageUrl = urlParams.get('image');
-            const pixelSize = urlParams.get('pixelSize');
-            const colorMode = urlParams.get('colorMode');
-            const edgeMode = urlParams.get('edgeMode');
-
-            if (imageUrl) {
-                // 等待页面完全加载后再处理参数
-                window.addEventListener('load', function () {
-                    // 触发图像加载
-                    const img = new Image();
-                    img.crossOrigin = 'Anonymous';
-                    img.onload = function () {
-                        // 创建File对象
-                        const fullImageUrl = `/asset/example/${imageUrl}`;
-
-                        fetch(fullImageUrl)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                return response.blob();
-                            })
-                            .then(blob => {
-                                const file = new File([blob], "example-image.png", { type: blob.type });
-
-                                // 触发文件处理
-                                const dataTransfer = new DataTransfer();
-                                dataTransfer.items.add(file);
-
-                                const fileInput = document.getElementById('imageInput');
-                                if (fileInput) {
-                                    fileInput.files = dataTransfer.files;
-                                    // 创建并触发change事件
-                                    const event = new Event('change', { bubbles: true });
-                                    fileInput.dispatchEvent(event);
-                                }
-
-                                // 清除URL参数
-                                window.history.replaceState({}, document.title, "/");
-                            })
-                            .catch(error => {
-                                console.error('Error loading example image:', error);
-                            });
-                    };
-                    img.src = `/asset/example/${imageUrl}`;
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>

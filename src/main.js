@@ -57,9 +57,9 @@ class PixelatorApp {
     const colorMode = document.getElementById('colorMode');
     const edgeMode = document.getElementById('edgeMode');
 
-    pixelSize.addEventListener('input', this.handlePixelSizeChange.bind(this));
-    colorMode.addEventListener('change', this.handleSettingsChange.bind(this));
-    edgeMode.addEventListener('change', this.handleSettingsChange.bind(this));
+    if (pixelSize) pixelSize.addEventListener('input', this.handlePixelSizeChange.bind(this));
+    if (colorMode) colorMode.addEventListener('change', this.handleSettingsChange.bind(this));
+    if (edgeMode) edgeMode.addEventListener('change', this.handleSettingsChange.bind(this));
 
     // Presets
     const presetButtons = document.querySelectorAll('.preset-btn');
@@ -82,6 +82,14 @@ class PixelatorApp {
     const zoomPixelated = document.getElementById('zoomPixelated');
     if (zoomOriginal) zoomOriginal.addEventListener('click', this.handleZoomOriginal.bind(this));
     if (zoomPixelated) zoomPixelated.addEventListener('click', this.handleZoomPixelated.bind(this));
+
+    // Language selector
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+      languageSelect.addEventListener('change', this.handleLanguageChange.bind(this));
+      // Set the correct selected option based on current URL
+      this.updateLanguageSelector();
+    }
   }
 
   /**
@@ -669,6 +677,34 @@ class PixelatorApp {
   }
 
   /**
+   * Handle language change from selector
+   */
+  handleLanguageChange(e) {
+    const selectedUrl = e.target.value;
+    if (selectedUrl) {
+      window.location.href = selectedUrl;
+    }
+  }
+
+  /**
+   * Update language selector to show current language
+   */
+  updateLanguageSelector() {
+    const languageSelect = document.getElementById('languageSelect');
+    if (!languageSelect) return;
+
+    const currentPath = window.location.pathname;
+    const options = languageSelect.querySelectorAll('option');
+    
+    options.forEach(option => {
+      const optionPath = option.value;
+      if (currentPath.includes(optionPath) || optionPath.includes(currentPath)) {
+        option.selected = true;
+      }
+    });
+  }
+
+  /**
    * Show welcome guide for first-time users
    */
   showWelcomeGuide() {
@@ -682,9 +718,78 @@ class PixelatorApp {
       }, 1000);
     }
   }
+
+  /**
+   * Handle example images and URL parameters
+   */
+  setupExampleImages() {
+    // Handle example image clicks
+    const exampleImages = document.querySelectorAll('.example-image');
+    exampleImages.forEach(image => {
+      image.addEventListener('click', () => {
+        const imageUrl = image.getAttribute('data-src');
+        this.loadExampleImage(imageUrl);
+      });
+    });
+
+    // Check for URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const imageUrl = urlParams.get('image');
+    const pixelSize = urlParams.get('pixelSize');
+    const colorMode = urlParams.get('colorMode');
+    const edgeMode = urlParams.get('edgeMode');
+
+    if (imageUrl) {
+      // Wait for page to fully load before processing parameters
+      window.addEventListener('load', () => {
+        this.loadExampleImage(imageUrl);
+        
+        // Clear URL parameters
+        window.history.replaceState({}, document.title, "/");
+      });
+    }
+  }
+
+  /**
+   * Load example image from asset folder
+   */
+  loadExampleImage(imageUrl) {
+    // Build full image URL path
+    const fullImageUrl = `/asset/example/${imageUrl}`;
+
+    // Use fetch API to get image data
+    fetch(fullImageUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const file = new File([blob], "example-image.png", { type: "image/png" });
+
+        // Trigger file processing
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+
+        const fileInput = document.getElementById('imageInput');
+        if (fileInput) {
+          fileInput.files = dataTransfer.files;
+          // Create and dispatch change event
+          const event = new Event('change', { bubbles: true });
+          fileInput.dispatchEvent(event);
+        }
+      })
+      .catch(error => {
+        console.error('Error loading example image:', error);
+      });
+  }
 }
 
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  new PixelatorApp();
+  const app = new PixelatorApp();
+  
+  // Setup example images after initialization
+  app.setupExampleImages();
 });

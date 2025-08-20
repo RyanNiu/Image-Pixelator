@@ -33,6 +33,8 @@
     <link rel="alternate" hreflang="en" href="/en/index.html">
     <link rel="alternate" hreflang="zh" href="/zh/index.html">
     <link rel="alternate" hreflang="es" href="/es/index.html">
+    <link rel="alternate" hreflang="fr" href="/fr/index.html">
+    <link rel="alternate" hreflang="ru" href="/ru/index.html">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J86JS45XHN"></script>
@@ -79,6 +81,8 @@
                             <option value="/en/">🇺🇸 English</option>
                             <option value="/zh/" selected>🇨🇳 中文</option>
                             <option value="/es/">🇪🇸 Español</option>
+                            <option value="/fr/">🇫🇷 Français</option>
+                            <option value="/ru/">🇷🇺 Русский</option>
                         </select>
                     </div>
                 </div>
@@ -717,6 +721,17 @@
                         <li><a href="mailto:info@imagepixelator.pics" class="hover:text-white transition-colors">联系我们</a></li>
                     </ul>
                 </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">语言</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/en/" class="hover:text-white transition-colors">English</a></li>
+                        <li><a href="/es/" class="hover:text-white transition-colors">Español</a></li>
+                        <li><a href="/zh/" class="hover:text-white transition-colors">中文</a></li>
+                        <li><a href="/fr/" class="hover:text-white transition-colors">Français</a></li>
+                        <li><a href="/ru/" class="hover:text-white transition-colors">Русский</a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
@@ -741,6 +756,15 @@
     <script>
         // 处理从示例页面传递的参数
         document.addEventListener('DOMContentLoaded', function () {
+            // 确保dropZone和示例图片点击事件正确绑定
+            const dropZone = document.getElementById('dropZone');
+            const imageInput = document.getElementById('imageInput');
+            
+            if (dropZone && imageInput) {
+                // 确保dropZone点击事件正确绑定
+                dropZone.addEventListener('click', () => imageInput.click());
+            }
+            
             // 处理示例图片点击事件
             const exampleImages = document.querySelectorAll('.example-image');
             exampleImages.forEach(image => {
@@ -749,7 +773,6 @@
                     loadExampleImage(imageUrl);
                 });
             });
-
 
             // 加载示例图片到dropZone
             function loadExampleImage(imageUrl) {
