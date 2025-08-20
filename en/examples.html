@@ -14,10 +14,10 @@
                 <div class="flex items-center space-x-4">
                     <a href="/en/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
                     <div class="language-selector">
-                        <select id="languageSelect" class="border rounded px-2 py-1 text-sm">
-                            <option value="en" selected>🇺🇸 English</option>
-                            <option value="zh">🇨🇳 中文</option>
-                            <option value="es">🇪🇸 Español</option>
+                        <select id="languageSelect" class="border rounded px-2 py-1 text-sm" onchange="window.location.href=this.value">
+                            <option value="/en/examples.html" selected>🇺🇸 English</option>
+                            <option value="/zh/examples.html">🇨🇳 中文</option>
+                            <option value="/es/examples.html">🇪🇸 Español</option>
                         </select>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
     </footer>
 
     <script type="module">
-        import { I18nManager } from '/src/utils/i18n.js';
+        import { I18nManager } from '../src/i18n/i18n.js';
         
         // Initialize i18n
         const i18n = new I18nManager();
@@ -195,13 +195,27 @@
         // Setup language selector
         const languageSelect = document.getElementById('languageSelect');
         if (languageSelect) {
-            // Set initial language based on current selection
-            languageSelect.value = i18n.getCurrentLanguage();
+            // 确保选择正确的语言选项
+            const currentLang = i18n.getCurrentLanguage();
+            // 根据当前语言设置选择器的值
+            if (currentLang === 'en') {
+                languageSelect.value = '/en/examples.html';
+            } else if (currentLang === 'zh') {
+                languageSelect.value = '/zh/examples.html';
+            } else if (currentLang === 'es') {
+                languageSelect.value = '/es/examples.html';
+            }
             
-            // Handle language change
-            languageSelect.addEventListener('change', (e) => {
-                i18n.changeLanguage(e.target.value);
-            });
+            // 如果没有选中任何选项，默认选择当前URL对应的语言
+            if (languageSelect.selectedIndex === -1) {
+                if (window.location.pathname.includes('/zh/')) {
+                    languageSelect.value = '/zh/examples.html';
+                } else if (window.location.pathname.includes('/es/')) {
+                    languageSelect.value = '/es/examples.html';
+                } else {
+                    languageSelect.value = '/en/examples.html';
+                }
+            }
         }
         
         // Handle example button clicks

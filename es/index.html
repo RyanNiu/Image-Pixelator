@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixelador de Imágenes - Herramienta Gratuita de Arte Pixel | Multi-idioma</title>
-    <meta name="description" content="¡Convierte imágenes a arte pixel instantáneamente en tu navegador! No requiere subida, procesamiento frontend puro, gratis y privado.">
-    <meta name="keywords" content="Generador de Arte Pixelado, Convertir Imagen a Pixel Art Gratis, Herramienta Pixelado Online">
-    
+    <title>Pixelador de Imágenes - #1 100% Herramienta de Arte Pixel Online Gratis | Multi-idioma</title>
+    <meta name="description"
+        content="¡Convierte imágenes a arte pixel instantáneamente en tu navegador! No requiere carga, procesamiento frontend puro, gratis y privado">
+    <meta name="keywords" content="Pixelador de Imágenes, Generador de Arte Pixel Online, Convertir Imagen a Pixel Art Gratis">
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
-    
+    <link rel="icon" type="image/png" sizes="32x32" href="/LOGO.png">
+
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="en" href="/en/index.html">
+    <link rel="alternate" hreflang="zh" href="/zh/index.html">
+    <link rel="alternate" hreflang="es" href="/es/index.html">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J86JS45XHN"></script>
     <script>
@@ -20,7 +26,7 @@
 
         gtag('config', 'G-J86JS45XHN');
     </script>
-    
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -29,186 +35,787 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "sxbdd5pgec");
     </script>
-    
-    <!-- Language alternatives -->
-    <link rel="alternate" hreflang="en" href="/en/">
-    <link rel="alternate" hreflang="zh" href="/zh/">
-    <link rel="alternate" hreflang="es" href="/es/">
-    
+
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
+
 <body class="bg-gray-50 min-h-screen">
-    <header class="bg-white shadow-sm border-b">
+    <!-- 1. Header -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <h1 class="text-2xl font-bold text-gray-900" data-i18n="title">Pixelador de Imágenes</h1>
-                <div class="language-selector">
-                    <select id="languageSelect" class="border rounded px-3 py-1">
-                        <option value="en">🇺🇸 English</option>
-                        <option value="zh">🇨🇳 中文</option>
-                        <option value="es" selected>🇪🇸 Español</option>
-                    </select>
+                <!-- a. Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="/LOGO.png" alt="Logo del Pixelador de Imágenes" class="w-8 h-8 rounded-lg">
+                    <h1 class="text-xl font-bold text-gray-900">Pixelador de Imágenes</h1>
+                </div>
+
+                <!-- b. Navigation Menu & c. Language Switch -->
+                <div class="flex items-center space-x-6">
+                    <nav class="hidden md:flex items-center space-x-4">
+                        <a href="#how-to-use" class="text-gray-600 hover:text-blue-600 text-sm font-medium">Cómo Usar</a>
+                        <a href="#examples" class="text-gray-600 hover:text-blue-600 text-sm font-medium">Ejemplos</a>
+                        <a href="#privacy" class="text-gray-600 hover:text-blue-600 text-sm font-medium">Privacidad</a>
+                    </nav>
+                    <div class="language-selector">
+                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm" onchange="window.location.href=this.value">
+                            <option value="/en/">🇺🇸 English</option>
+                            <option value="/zh/">🇨🇳 中文</option>
+                            <option value="/es/" selected>🇪🇸 Español</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Privacy Notice -->
-        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
-            <p class="text-green-800 text-sm" data-i18n="privacy-notice">
-                🔒 Todo el procesamiento ocurre en tu navegador. Las imágenes nunca salen de tu dispositivo. Los datos se borran al cerrar la página.
-            </p>
-        </div>
+    <main>
+        <!-- 2. Title Area -->
+        <section class="bg-gradient-to-br from-blue-50 to-purple-50 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <!-- a. Main Title -->
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Pixelador de Imágenes
+                    </span>
+                </h1>
 
-        <!-- Upload Section -->
-        <section class="bg-white rounded-lg shadow-sm border p-6 mb-8">
-            <h2 class="text-xl font-semibold mb-4" data-i18n="upload-title">Subir Imagen</h2>
-            
-            <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer">
-                <div id="uploadPrompt">
-                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <!-- b. Subtitle -->
+                <p class="text-xl md:text-2xl text-gray-600 mb-6">
+                    Transforma tus fotos en impresionante arte pixelado
+                </p>
+
+                <!-- c. Feature Description -->
+                <p class="text-lg text-gray-500 mb-4 max-w-3xl mx-auto">
+                    Herramienta en línea gratuita que convierte imágenes en arte pixelado instantáneamente en tu navegador.
+                    No requiere carga, completamente privada y compatible con múltiples formatos.
+                </p>
+
+                <!-- Privacy Notice -->
+                <div
+                    class="inline-flex items-center bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clip-rule="evenodd"></path>
                     </svg>
-                    <p class="text-lg text-gray-600 mb-2" data-i18n="upload-prompt">Haz clic para subir o arrastra la imagen aquí</p>
-                    <p class="text-sm text-gray-500" data-i18n="upload-limits">Soporta JPG, PNG, WebP • Máx 20MB • Recomendado ≤10MB</p>
+                    <span>100% Privado - El procesamiento ocurre en tu navegador</span>
                 </div>
-                <input type="file" id="imageInput" accept="image/*" class="hidden">
+
+                <!-- 4. Function Module (moved from below) -->
+                <div id="upload" class="mt-4">
+                    <!-- Preview Area -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <!-- Example Images -->
+                        <div class="mb-6">
+                            <!-- <h3 class="text-lg font-bold mb-3 text-gray-800">Imágenes de Ejemplo</h3> -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="8-bitGameStyle.png">
+                                    <img src="/asset/example/8-bitGameStyle.png" alt="Estilo de Juego 8-bit"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="MinecraftStyle.png">
+                                    <img src="/asset/example/MinecraftStyle.png" alt="Estilo Minecraft"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="MosaicArt.png">
+                                    <img src="/asset/example/MosaicArt.png" alt="Arte Mosaico"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="VintagePhotoEffect.png">
+                                    <img src="/asset/example/VintagePhotoEffect.png" alt="Efecto Foto Vintage"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="example4.png">
+                                    <img src="/asset/example/example4.png" alt="Estilo de Juego 8-bit"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="example3.png">
+                                    <img src="/asset/example/example3.png" alt="Estilo de Juego 8-bit"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="example2.png">
+                                    <img src="/asset/example/example2.png" alt="Estilo de Juego 8-bit"
+                                        class="aspect-square object-cover">
+                                </div>
+                                <div class="example-image cursor-pointer rounded overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all"
+                                    data-src="example1.png">
+                                    <img src="/asset/example/example1.png" alt="Estilo de Juego 8-bit"
+                                        class="aspect-square object-cover">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold">Vista Previa en Tiempo Real</h3>
+                        </div> -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Original (with integrated upload) -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-sm font-medium text-gray-700">Imagen Original</h3>
+                                    <div class="flex items-center space-x-2">
+                                        <button id="zoomOriginal"
+                                            class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                        <button id="removeOriginalImage"
+                                            class="text-xs text-red-600 hover:text-red-800 hidden">🗑️ Eliminar</button>
+                                    </div>
+                                </div>
+                                <div id="dropZone"
+                                    class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square hover:border-blue-400 hover:bg-blue-50 transition-all cursor-pointer group overflow-hidden flex items-center justify-center">
+                                    <canvas id="originalCanvas"
+                                        class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                    <div id="originalPlaceholder" class="text-center text-gray-400">
+                                        <div
+                                            class="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm font-semibold text-gray-700 mb-1">
+                                            Arrastra tu imagen aquí o haz clic para buscar</p>
+                                        <p class="text-xs text-gray-500">JPG, PNG, WebP • Máx. 20MB</p>
+                                    </div>
+                                    <div id="originalOverlay"
+                                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                        Haz clic para hacer zoom
+                                    </div>
+                                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                                </div>
+                            </div>
+
+                            <!-- Pixelated -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-sm font-medium text-gray-700">Resultado Pixelado</h3>
+                                    <button id="zoomPixelated"
+                                        class="text-xs text-blue-600 hover:text-blue-800 hidden">🔍 Zoom</button>
+                                </div>
+                                <div
+                                    class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative aspect-square overflow-hidden flex items-center justify-center">
+                                    <canvas id="pixelatedCanvas"
+                                        class="max-w-full max-h-full cursor-pointer hidden"></canvas>
+                                    <div id="pixelatedPlaceholder" class="text-center text-gray-400">
+                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                            </path>
+                                        </svg>
+                                        <p class="text-sm">La vista previa pixelada aparecerá aquí</p>
+                                    </div>
+                                    <div id="pixelatedOverlay"
+                                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm hidden">
+                                        Haz clic para hacer zoom
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Function Area -->
+                        <div class="mt-6 bg-gray-50 rounded-lg p-6">
+                            <!-- <h3 class="text-lg font-bold mb-4">Configuración de Pixelación</h3> -->
+
+                            <!-- Pixel Size -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tamaño de Píxel</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" id="pixelSize" min="1" max="50" value="8" class="flex-1">
+                                    <span id="pixelSizeValue"
+                                        class="text-sm font-mono bg-white px-2 py-1 rounded border">8px</span>
+                                </div>
+                            </div>
+
+                            <!-- Color Mode & Edge Processing (combined in one line) -->
+                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Modo de Color</label>
+                                    <select id="colorMode" class="w-full border rounded px-3 py-2 bg-white">
+                                        <option value="original">Colores Originales</option>
+                                        <option value="retro">8-bit Retro</option>
+                                        <option value="grayscale">Escala de Grises</option>
+                                        <option value="sepia">Tono Sepia</option>
+                                        <option value="vibrant">Colores Vibrantes</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Procesamiento de Bordes</label>
+                                    <select id="edgeMode" class="w-full border rounded px-3 py-2 bg-white">
+                                        <option value="hard">Bordes Duros</option>
+                                        <option value="soft">Bordes Suaves</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Presets -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Preajustes Rápidos</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="game">Juego 8-bit</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="arcade">Arcade</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="avatar">Avatar</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="minecraft">Minecraft</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="mosaic">Mosaico</button>
+                                    <button
+                                        class="preset-btn px-2 py-1 text-xs border rounded hover:bg-white transition-colors"
+                                        data-preset="vintage">Vintage</button>
+                                </div>
+                            </div>
+
+                            <!-- History & Download -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Historial</label>
+                                    <div class="flex space-x-1">
+                                        <button id="undoBtn"
+                                            class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50"
+                                            disabled>
+                                            <span>↶ Deshacer</span>
+                                        </button>
+                                        <button id="redoBtn"
+                                            class="flex-1 px-2 py-1 text-xs border rounded hover:bg-white disabled:opacity-50"
+                                            disabled>
+                                            <span>↷ Rehacer</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Formato</label>
+                                    <select id="downloadFormat"
+                                        class="w-full border rounded px-2 py-1 text-xs bg-white">
+                                        <option value="png">PNG</option>
+                                        <option value="jpg">JPG</option>
+                                        <option value="webp">WebP</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button id="downloadBtn"
+                                class="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                disabled>
+                                <span>Descargar Imagen Pixelada</span>
+                            </button>
+                            <p class="text-xs text-gray-500 mt-2 text-center">Sube una imagen para habilitar la descarga</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Processing Section -->
-        <div id="processingSection">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Controls -->
-                <section class="bg-white rounded-lg shadow-sm border p-6">
-                    <h2 class="text-xl font-semibold mb-4" data-i18n="controls-title">Configuración de Pixelado</h2>
-                    
-                    <!-- Pixel Size -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="pixel-size">Tamaño de Píxel</label>
-                        <div class="flex items-center space-x-4">
-                            <input type="range" id="pixelSize" min="1" max="50" value="8" class="flex-1">
-                            <span id="pixelSizeValue" class="text-sm font-mono bg-gray-100 px-2 py-1 rounded">8px</span>
+        <!-- 3. How to Use Steps -->
+        <section id="how-to-use" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Cómo Funciona</h2>
+                    <p class="text-lg text-gray-600">Proceso simple de 3 pasos para crear arte pixelado asombroso</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">1</span>
                         </div>
+                        <h3 class="text-xl font-semibold mb-3">Subir Imagen</h3>
+                        <p class="text-gray-600">Elige cualquier imagen JPG, PNG o WebP de tu dispositivo. Arrastra y suelta o haz clic para buscar.</p>
                     </div>
 
-                    <!-- Color Mode -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="color-mode">Modo de Color</label>
-                        <select id="colorMode" class="w-full border rounded px-3 py-2">
-                            <option value="original" data-i18n="color-original">Colores Originales</option>
-                            <option value="retro" data-i18n="color-retro">Retro 8-bit</option>
-                            <option value="grayscale" data-i18n="color-grayscale">Escala de Grises</option>
-                            <option value="sepia" data-i18n="color-sepia">Tono Sepia</option>
-                            <option value="vibrant" data-i18n="color-vibrant">Colores Vibrantes</option>
-                        </select>
-                    </div>
-
-                    <!-- Edge Processing -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="edge-processing">Procesamiento de Bordes</label>
-                        <select id="edgeMode" class="w-full border rounded px-3 py-2">
-                            <option value="hard" data-i18n="edge-hard">Bordes Duros</option>
-                            <option value="soft" data-i18n="edge-soft">Bordes Suaves</option>
-                        </select>
-                    </div>
-
-                    <!-- Presets -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="presets">Presets Rápidos</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="game" data-i18n="preset-game">Estilo Juego 8-bit</button>
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="arcade" data-i18n="preset-arcade">Retro Arcade</button>
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="avatar" data-i18n="preset-avatar">Avatar Baja Resolución</button>
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="minecraft" data-i18n="preset-minecraft">Estilo Minecraft</button>
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="mosaic" data-i18n="preset-mosaic">Arte Mosaico</button>
-                            <button class="preset-btn px-3 py-2 text-sm border rounded hover:bg-gray-50 transition-colors" data-preset="vintage" data-i18n="preset-vintage">Efecto Vintage</button>
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">2</span>
                         </div>
+                        <h3 class="text-xl font-semibold mb-3">Personalizar Configuración</h3>
+                        <p class="text-gray-600">Ajusta el tamaño de píxel, elige modos de color y aplica efectos preestablecidos para diferentes estilos.</p>
                     </div>
 
-                    <!-- Download -->
-                    <div class="border-t pt-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="download-format">Formato de Descarga</label>
-                        <select id="downloadFormat" class="w-full border rounded px-3 py-2 mb-4">
-                            <option value="png">PNG (Transparente)</option>
-                            <option value="jpg">JPG (Comprimido)</option>
-                            <option value="webp">WebP (Eficiente)</option>
-                        </select>
-                        <button id="downloadBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50" disabled data-i18n="download-btn">Descargar Imagen Pixelada</button>
-                        <p class="text-xs text-gray-500 mt-2 text-center" data-i18n="upload-first-hint">Sube una imagen para habilitar la descarga</p>
-                    </div>
-                </section>
-
-                <!-- Preview -->
-                <section class="lg:col-span-2 bg-white rounded-lg shadow-sm border p-6">
-                    <h2 class="text-xl font-semibold mb-4" data-i18n="preview-title">Vista Previa</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Original -->
-                        <div>
-                            <h3 class="text-sm font-medium text-gray-700 mb-2" data-i18n="original-image">Imagen Original</h3>
-                            <div class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative h-64 flex items-center justify-center">
-                                <canvas id="originalCanvas" class="max-w-full h-auto cursor-pointer hidden"></canvas>
-                                <div id="originalPlaceholder" class="text-center text-gray-400">
-                                    <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                    <p class="text-sm" data-i18n="no-image-uploaded">No se ha subido ninguna imagen</p>
-                                </div>
-                            </div>
+                    <div class="text-center group">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <span class="text-white font-bold text-xl">3</span>
                         </div>
-                        
-                        <!-- Pixelated -->
-                        <div>
-                            <h3 class="text-sm font-medium text-gray-700 mb-2" data-i18n="pixelated-image">Resultado Pixelado</h3>
-                            <div class="border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative h-64 flex items-center justify-center">
-                                <canvas id="pixelatedCanvas" class="max-w-full h-auto cursor-pointer hidden"></canvas>
-                                <div id="pixelatedPlaceholder" class="text-center text-gray-400">
-                                    <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                                    </svg>
-                                    <p class="text-sm" data-i18n="pixelated-preview">La vista previa pixelada aparecerá aquí</p>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Descargar Resultado</h3>
+                        <p class="text-gray-600">Obtén tu imagen pixelada en formato PNG, JPG o WebP de alta calidad.</p>
                     </div>
-                </section>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- 5. Detailed Introduction -->
+        <section id="features" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Funciones Potentes</h2>
+                    <p class="text-lg text-gray-600">Todo lo que necesitas para crear arte pixelado asombroso</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="text-center p-6 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Múltiples Formatos</h3>
+                        <p class="text-gray-600 text-sm">Soporte para formatos de entrada y salida JPG, PNG, WebP</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Vista Previa en Tiempo Real</h3>
+                        <p class="text-gray-600 text-sm">Ve los cambios instantáneamente al ajustar la configuración</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-green-50 hover:bg-green-100 transition-colors">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a4 4 0 004 4h4a2 2 0 002-2V5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">100% Privado</h3>
+                        <p class="text-gray-600 text-sm">Todo el procesamiento ocurre en tu navegador, sin enviar datos a servidores</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-yellow-50 hover:bg-yellow-100 transition-colors">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Rápido como el Rayo</h3>
+                        <p class="text-gray-600 text-sm">Procesamiento instantáneo con algoritmos optimizados</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-red-50 hover:bg-red-100 transition-colors">
+                        <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Preajustes Inteligentes</h3>
+                        <p class="text-gray-600 text-sm">6 preajustes incorporados para diferentes estilos artísticos</p>
+                    </div>
+
+                    <div class="text-center p-6 rounded-xl bg-indigo-50 hover:bg-indigo-100 transition-colors">
+                        <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Multi-idioma</h3>
+                        <p class="text-gray-600 text-sm">Disponible en inglés, chino y español</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Examples & Tips -->
+        <section id="examples" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Ejemplos y Consejos</h2>
+                    <p class="text-lg text-gray-600">Mira lo que puedes crear con diferentes configuraciones</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/8-bitGameStyle.webp" type="image/webp">
+                                <img src="/asset/example/8-bitGameStyle.png" alt="Estilo de Juego 8-bit"
+                                    class="w-full h-full object-cover">
+                            </picture>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2">Juegos Retro</h3>
+                            <p class="text-gray-600 text-sm mb-3">Perfecto para crear sprites de juegos y arte retro</p>
+                            <div class="text-xs text-gray-500">
+                                <span>Configuración:</span> 12px • 8-bit Retro • Bordes duros
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/MinecraftStyle.webp" type="image/webp">
+                                <img src="/asset/example/MinecraftStyle.png" alt="Estilo Minecraft"
+                                    class="w-full h-full object-cover">
+                            </picture>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2">Arte de Bloques</h3>
+                            <p class="text-gray-600 text-sm mb-3">Crea texturas que encajan perfectamente en Minecraft</p>
+                            <div class="text-xs text-gray-500">
+                                <span>Configuración:</span> 16px • 8-bit Retro • Bordes duros
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-100 flex items-center justify-center">
+                            <picture>
+                                <source srcset="/asset/example/MosaicArt.webp" type="image/webp">
+                                <img src="/asset/example/MosaicArt.png" alt="Arte Mosaico"
+                                    class="w-full h-full object-cover">
+                            </picture>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2">Efecto Artístico</h3>
+                            <p class="text-gray-600 text-sm mb-3">Hermosa obra de arte estilo mosaico con bordes suaves</p>
+                            <div class="text-xs text-gray-500">
+                                <span>Configuración:</span> 6px • Original • Bordes suaves
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="/es/examples.html"
+                        class="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors border">
+                        <span>Ver Todos los Ejemplos →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ Section -->
+        <section id="faq" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Preguntas Frecuentes sobre el Pixelador de Imágenes</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Aprende más sobre nuestro convertidor de arte pixelado y cómo crear arte pixelado asombroso</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">¿Qué es un convertidor de imagen a arte pixelado?</h3>
+                        <p class="text-gray-600">Un convertidor de imagen a arte pixelado es una herramienta poderosa que transforma fotografías digitales regulares en arte pixelado de estilo retro. Nuestro Pixelador de Imágenes utiliza algoritmos avanzados para reducir la resolución de la imagen mientras preserva los elementos visuales clave, creando arte pixelado auténtico perfecto para sprites de juegos, diseños retro y proyectos creativos. Este convertidor de arte pixelado es la forma más fácil de convertir tus imágenes en obras maestras nostálgicas de 8 bits.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">¿Cómo funciona el creador de arte pixelado?</h3>
+                        <p class="text-gray-600">Nuestro creador de arte pixelado funciona procesando tu imagen cargada a través de nuestro motor de pixelación sofisticado. Con nuestro convertidor de imagen a pixel, puedes ajustar fácilmente el tamaño de píxel, elegir entre varios modos de color (original, 8-bit retro, escala de grises, sepia, vibrante) y seleccionar opciones de procesamiento de bordes. El convertidor de arte pixelado procesa todos los datos directamente en tu navegador para máxima privacidad y resultados instantáneos. Esta herramienta de pixelación de imágenes te da control completo sobre tu proceso de creación de arte pixelado.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">¿Es gratis pixelar imágenes con esta herramienta?</h3>
+                        <p class="text-gray-600">Sí, nuestro convertidor de imagen a pixel es completamente gratuito de usar sin costos ocultos. Puedes pixelar imágenes de cualquier tamaño (hasta 20MB) sin marcas de agua ni limitaciones. Toda la conversión de arte pixelado ocurre en tu navegador, por lo que no hay costos de servidor ni tarifas ocultas. Nuestro creador de arte pixelado permite conversiones ilimitadas, haciéndolo la mejor herramienta gratuita para crear arte pixelado a partir de tus imágenes.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">¿Qué formatos de imagen admite el convertidor de arte pixelado?</h3>
+                        <p class="text-gray-600">Nuestro creador de arte pixelado admite todos los formatos de imagen principales, incluyendo JPG, PNG y WebP. El convertidor de imagen a arte pixelado mantiene la calidad de tu imagen original mientras la transforma en una obra de arte pixelada impresionante en segundos. Ya sea que estés usando nuestra herramienta de pixelación de imágenes para desarrollo de juegos, contenido de redes sociales o proyectos artísticos, nuestro convertidor de arte pixelado maneja todos los formatos populares sin problemas.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">¿Está protegida mi privacidad cuando uso la herramienta de pixelación de imágenes?</h3>
+                        <p class="text-gray-600">Absolutamente. Nuestro convertidor de imagen a pixel funciona completamente en tu navegador sin cargar ningún dato a ningún servidor. Ninguna imagen sale de tu dispositivo, y no se almacena ni rastrea ningún dato. Este convertidor de arte pixelado asegura tu privacidad mientras proporciona resultados de pixelación de calidad profesional. Cuando usas nuestro creador de arte pixelado, puedes estar seguro de que tus imágenes y datos permanecen completamente privados y seguros.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Privacy Policy -->
+        <section id="privacy" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Política de Privacidad</h2>
+                    <p class="text-lg text-gray-600">Tu privacidad es nuestra prioridad</p>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-green-900 mb-3">No registramos datos</h3>
+                            <p class="text-green-800 mb-4">
+                                Todas las conversiones y cálculos se realizan en tu navegador usando JavaScript. No enviamos ningún bit sobre tus datos de entrada a nuestros servidores. No hay procesamiento del lado del servidor en absoluto. Usamos Google Analytics para análisis de uso del sitio.
+                                Tu dirección IP se guarda en nuestro servidor web para análisis adicionales. El plan gratuito no usa cookies y no almacena información de sesión en cookies. Los planes premium y de equipo usan cookies para almacenar información de sesión para que siempre estés conectado. Usamos el almacenamiento local de tu navegador para guardar la entrada de las herramientas. Permanece en tu computadora.
+                            </p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm">Solo procesamiento local</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm">Sin carga de imágenes</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm">Sin almacenamiento de datos</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-green-800 text-sm">100% seguro</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Terms of Service -->
+        <section id="terms" class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Términos de Servicio</h2>
+                    <p class="text-lg text-gray-600">Lo legal</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <p class="text-gray-700 mb-6">
+                        Al usar Herramientas en Línea aceptas nuestros Términos de Servicio. Todas las herramientas son gratuitas para uso personal pero para usarlas con fines comerciales, necesitas obtener un plan premium. No puedes hacer cosas ilegales o sospechosas con nuestras herramientas. Podemos bloquear tu acceso a las herramientas, si descubrimos que estás haciendo algo malo. No somos responsables de tus acciones y no ofrecemos garantía. Podemos revisar nuestros términos en cualquier momento.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Derechos de Uso</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Gratis para uso personal</li>
+                                <li>• Uso comercial requiere premium</li>
+                                <li>• Debe cumplir con las leyes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Limitaciones</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• No se proporciona garantía</li>
+                                <li>• Responsabilidad limitada</li>
+                                <li>• Los términos pueden cambiar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8">
+    <!-- 11. Footer -->
+    <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="font-semibold mb-4" data-i18n="footer-about">Sobre Nosotros</h4>
-                    <p class="text-sm text-gray-400" data-i18n="footer-description">Somos una herramienta de pixelado de imágenes en línea gratuita y de código abierto. Convertimos tus imágenes en arte pixelado en tu navegador.</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="/LOGO.png" alt="Logo del Pixelador de Imágenes" class="w-8 h-8 rounded-lg">
+                        <h3 class="text-xl font-bold">Pixelador de Imágenes</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Herramienta en línea gratuita para convertir imágenes en arte pixelado. Rápida, segura y completamente privada. El mejor convertidor de imagen a arte pixelado para todos tus proyectos creativos.
+                    </p>
+                    <!-- <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+                            </svg>
+                        </a>
+                    </div> -->
                 </div>
+
                 <div>
-                    <h4 class="font-semibold mb-4" data-i18n="footer-legal">Legal</h4>
+                    <h4 class="font-semibold mb-4">Herramientas</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#privacy" class="hover:text-white transition-colors"
-                                data-i18n="footer-privacy">Política de Privacidad</a></li>
-                        <li><a href="#terms" class="hover:text-white transition-colors" data-i18n="footer-terms">Términos
-                                de Servicio</a></li>
-                        <li><a href="mailto:info@imagepixelator.pics" class="hover:text-white transition-colors"
-                                data-i18n="footer-contact">Contacto</a></li>
+                        <li><a href="#upload" class="hover:text-white transition-colors">Pixelador de Imágenes</a></li>
+                        <li><a href="/es/examples.html" class="hover:text-white transition-colors">Ejemplos</a></li>
+                        <li><a href="#how-to-use" class="hover:text-white transition-colors">Guía de Usuario</a></li>
                     </ul>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold mb-4" data-i18n="footer-social">Síguenos</h4>
+                    <h4 class="font-semibold mb-4">Legal</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="https://twitter.com/imagepixelator" class="hover:text-white transition-colors"
-                                data-i18n="footer-twitter">Twitter</a></li>
-                        <li><a href="https://github.com/imagepixelator" class="hover:text-white transition-colors"
-                                data-i18n="footer-github">GitHub</a></li>
+                        <li><a href="#privacy" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#terms" class="hover:text-white transition-colors">Términos de Servicio</a></li>
+                        <li><a href="mailto:info@imagepixelator.pics" class="hover:text-white transition-colors">Contacto</a></li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Pixelador de Imágenes. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+    <!-- 引用main.js   -->
+    <script type="module" src="../src/main.js"></script>
+    <script>
+        // Simplified language selector behavior
+        const languageSelect = document.getElementById('languageSelect');
+        if (languageSelect) {
+            languageSelect.addEventListener('change', (e) => {
+                window.location.href = e.target.value;
+            });
+        }
+    </script>
+    
+    <!-- 引入主要JavaScript文件 -->
+    <script type="module" src="../src/main.js"></script>
 
-    <script type="module" src="/src/main.js"></script>
+    <script>
+        // 处理从示例页面传递的参数
+        document.addEventListener('DOMContentLoaded', function () {
+            // 处理示例图片点击事件
+            const exampleImages = document.querySelectorAll('.example-image');
+            exampleImages.forEach(image => {
+                image.addEventListener('click', function () {
+                    const imageUrl = this.getAttribute('data-src');
+                    loadExampleImage(imageUrl);
+                });
+            });
+
+            // 加载示例图片到dropZone
+            function loadExampleImage(imageUrl) {
+                // 构建完整的图片URL路径
+                const fullImageUrl = `/asset/example/${imageUrl}`;
+                
+                // 直接使用fetch API获取图片数据
+                fetch(fullImageUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const file = new File([blob], "example-image.png", { type: "image/png" });
+
+                        // 触发文件处理
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+
+                        const fileInput = document.getElementById('imageInput');
+                        if (fileInput) {
+                            fileInput.files = dataTransfer.files;
+                            // 创建并触发change事件
+                            const event = new Event('change', { bubbles: true });
+                            fileInput.dispatchEvent(event);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading example image:', error);
+                    });
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const imageUrl = urlParams.get('image');
+            const pixelSize = urlParams.get('pixelSize');
+            const colorMode = urlParams.get('colorMode');
+            const edgeMode = urlParams.get('edgeMode');
+
+            if (imageUrl) {
+                // 等待页面完全加载后再处理参数
+                window.addEventListener('load', function () {
+                    // 触发图像加载
+                    const img = new Image();
+                    img.crossOrigin = 'Anonymous';
+                    img.onload = function () {
+                        // 创建File对象
+                        const fullImageUrl = `/asset/example/${imageUrl}`;
+                        
+                        fetch(fullImageUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.blob();
+                            })
+                            .then(blob => {
+                                const file = new File([blob], "example-image.png", { type: blob.type });
+
+                                // 触发文件处理
+                                const dataTransfer = new DataTransfer();
+                                dataTransfer.items.add(file);
+
+                                const fileInput = document.getElementById('imageInput');
+                                if (fileInput) {
+                                    fileInput.files = dataTransfer.files;
+                                    // 创建并触发change事件
+                                    const event = new Event('change', { bubbles: true });
+                                    fileInput.dispatchEvent(event);
+                                }
+
+                                // 清除URL参数
+                                window.history.replaceState({}, document.title, "/");
+                            })
+                            .catch(error => {
+                                console.error('Error loading example image:', error);
+                            });
+                    };
+                    img.src = `/asset/example/${imageUrl}`;
+                });
+            }
+        });
+    </script>
 </body>
 </html>

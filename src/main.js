@@ -1,5 +1,5 @@
 import { ImagePixelator } from './utils/pixelator.js';
-import { I18nManager } from './utils/i18n.js';
+import { I18nManager } from './i18n/i18n.js';
 
 /**
  * Main Application Controller

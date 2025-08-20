@@ -62,10 +62,10 @@
                             data-i18n="nav-privacy">Privacy</a>
                     </nav>
                     <div class="language-selector">
-                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm">
-                            <option value="en">🇺🇸 English</option>
-                            <option value="zh">🇨🇳 中文</option>
-                            <option value="es">🇪🇸 Español</option>
+                        <select id="languageSelect" class="border rounded px-3 py-1 text-sm" onchange="window.location.href=this.value">
+                            <option value="/en/" selected>🇺🇸 English</option>
+                            <option value="/zh/">🇨🇳 中文</option>
+                            <option value="/es/">🇪🇸 Español</option>
                         </select>
                     </div>
                 </div>
@@ -541,7 +541,7 @@
                 </div>
 
                 <div class="text-center mt-12">
-                    <a href="/examples.html"
+                    <a href="/examples.html" id="viewExamplesLink"
                         class="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors border">
                         <span data-i18n="view-all-examples">View All Examples →</span>
                     </a>
@@ -765,7 +765,7 @@
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="#upload" class="hover:text-white transition-colors"
                                 data-i18n="footer-pixelator">Image Pixelator</a></li>
-                        <li><a href="/examples.html" class="hover:text-white transition-colors"
+                        <li><a href="/examples.html" id="footerExamplesLink" class="hover:text-white transition-colors"
                                 data-i18n="footer-examples">Examples</a></li>
                         <li><a href="#how-to-use" class="hover:text-white transition-colors"
                                 data-i18n="footer-guide">User Guide</a></li>
@@ -791,7 +791,15 @@
         </div>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
+    <script>
+        // Simplified language selector behavior
+        const languageSelect = document.getElementById('languageSelect');
+        if (languageSelect) {
+            languageSelect.addEventListener('change', (e) => {
+                window.location.href = e.target.value;
+            });
+        }
+    </script>
 
     <script>
         // 处理从示例页面传递的参数
@@ -804,6 +812,7 @@
                     loadExampleImage(imageUrl);
                 });
             });
+
 
             // 加载示例图片到dropZone
             function loadExampleImage(imageUrl) {

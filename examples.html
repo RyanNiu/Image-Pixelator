@@ -12,12 +12,12 @@
             <div class="flex justify-between items-center h-16">
                 <h1 class="text-2xl font-bold text-gray-900" data-i18n="examples-header">Image Pixelator - Examples</h1>
                 <div class="flex items-center space-x-4">
-                    <a href="/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
+                    <a href="/en/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
                     <div class="language-selector">
-                        <select id="languageSelect" class="border rounded px-2 py-1 text-sm">
-                            <option value="en">🇺🇸 English</option>
-                            <option value="zh">🇨🇳 中文</option>
-                            <option value="es">🇪🇸 Español</option>
+                        <select id="languageSelect" class="border rounded px-2 py-1 text-sm" onchange="window.location.href=this.value">
+                            <option value="/en/examples.html">🇺🇸 English</option>
+                            <option value="/zh/examples.html">🇨🇳 中文</option>
+                            <option value="/es/examples.html">🇪🇸 Español</option>
                         </select>
                     </div>
                 </div>
@@ -185,54 +185,36 @@
         </div>
     </footer>
 
-    <script type="module">
-        import { I18nManager } from './src/utils/i18n.js';
-        
-        // Initialize i18n
-        const i18n = new I18nManager();
-        i18n.init();
-        
-        // Setup language selector
-        const languageSelect = document.getElementById('languageSelect');
-        if (languageSelect) {
-            // Set initial language based on current selection
-            languageSelect.value = i18n.getCurrentLanguage();
-            
-            // Handle language change
-            languageSelect.addEventListener('change', (e) => {
-                i18n.changeLanguage(e.target.value);
-            });
-        }
-        
-        // Handle example button clicks
+    <script>
+        // 简化的语言切换功能
         document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                // 从URL参数获取当前语言
+                const urlParams = new URLSearchParams(window.location.search);
+                const lang = urlParams.get('lang');
+                if (lang && document.querySelector(`#languageSelect option[value="${lang}"]`)) {
+                    languageSelect.value = lang;
+                }
+                
+                // 当选择新语言时，将用户重定向到带有语言参数的相同页面
+                languageSelect.addEventListener('change', function(e) {
+                    // 获取当前页面URL并移除现有lang参数（如果有）
+                    let currentUrl = window.location.href.split('?')[0];
+                    // 添加新的lang参数
+                    window.location.href = `${currentUrl}?lang=${e.target.value}`;
+                });
+            }
+            
+            // 处理示例按钮点击
             const exampleButtons = document.querySelectorAll('.example-btn');
             exampleButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const image = this.getAttribute('data-image');
-                    const pixelSize = this.getAttribute('data-pixel-size') || '8';
-                    const colorMode = this.getAttribute('data-color-mode') || 'original';
-                    const edgeMode = this.getAttribute('data-edge-mode') || 'hard';
-                    
-                    // Redirect to main page with parameters
-                    window.location.href = `/?image=${image}&pixelSize=${pixelSize}&colorMode=${colorMode}&edgeMode=${edgeMode}`;
+                    // 保留基本的示例功能，移除复杂的参数传递
+                    window.location.href = `/?image=${image}`;
                 });
             });
-            
-            // Handle direct image loading from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const image = urlParams.get('image');
-            
-            if (image) {
-                // Update button with matching image
-                const matchingButton = document.querySelector(`.example-btn[data-image="${image}"]`);
-                if (matchingButton) {
-                    matchingButton.textContent = i18n.t('currently-active') || 'Currently Active';
-                    matchingButton.disabled = true;
-                    matchingButton.classList.add('bg-green-600', 'hover:bg-green-700');
-                    matchingButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                }
-            }
         });
     </script>
 </body>

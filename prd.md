@@ -59,7 +59,7 @@
   6. 示例&使用技巧
   7. Privacy Policy（参考文案如下）
     We don't log data
-    All conversions and calculations are done in your browser using JavaScript. We don't send a single bit about your input data to our servers. There is no server-side processing at all. We use Google Analytics and StatCounter for site usage analytics. Your IP address is saved on our web server for additional analytics. The free plan doesn't use cookies and don't store session information in cookies. The premium and team plans use cookies to store session information so that you are always logged in. We use your browser's local storage to save tools' input. It stays on your computer.
+    All conversions and calculations are done in your browser using JavaScript. We don't send a single bit about your input data to our servers. There is no server-side processing at all. We use Google Analytics for site usage analytics. Your IP address is saved on our web server for additional analytics. The free plan doesn't use cookies and don't store session information in cookies. The premium and team plans use cookies to store session information so that you are always logged in. We use your browser's local storage to save tools' input. It stays on your computer.
 
   8. Terms of Service（参考文案如下）
     The legal stuff
