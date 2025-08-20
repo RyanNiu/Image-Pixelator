@@ -1,15 +1,26 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/", "destination": "/index.html" },
     { "source": "/en", "destination": "/en/index.html" },
     { "source": "/zh", "destination": "/zh/index.html" },
     { "source": "/es", "destination": "/es/index.html" },
-    { "source": "/asset/:path*", "destination": "/asset/:path*" }
+    { "source": "/examples", "destination": "/examples.html" },
+    { "source": "/en/examples", "destination": "/en/examples.html" },
+    { "source": "/zh/examples", "destination": "/zh/examples.html" },
+    { "source": "/es/examples", "destination": "/es/examples.html" }
   ],
-  "redirects": [
-    { "source": "/en/", "destination": "/en", "permanent": true },
-    { "source": "/zh/", "destination": "/zh", "permanent": true },
-    { "source": "/es/", "destination": "/es", "permanent": true }
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    }
   ]
 }
