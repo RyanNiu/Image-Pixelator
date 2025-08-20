@@ -1,26 +1,7 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/en", "destination": "/en/index.html" },
-    { "source": "/zh", "destination": "/zh/index.html" },
-    { "source": "/es", "destination": "/es/index.html" },
-    { "source": "/examples", "destination": "/examples.html" },
-    { "source": "/en/examples", "destination": "/en/examples.html" },
-    { "source": "/zh/examples", "destination": "/zh/examples.html" },
-    { "source": "/es/examples", "destination": "/es/examples.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, must-revalidate"
-        }
-      ]
-    }
-  ]
+  "trailingSlash": false
 }
