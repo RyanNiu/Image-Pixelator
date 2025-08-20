@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/en", "dest": "/en/index.html" },
+    { "src": "/zh", "dest": "/zh/index.html" },
+    { "src": "/es", "dest": "/es/index.html" },
+    { "src": "/examples.html", "dest": "/examples.html" },
+    { "src": "/en/examples.html", "dest": "/en/examples.html" },
+    { "src": "/zh/examples.html", "dest": "/zh/examples.html" },
+    { "src": "/es/examples.html", "dest": "/es/examples.html" },
+    { "src": "/asset/(.*)", "dest": "/public/asset/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
