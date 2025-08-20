@@ -800,6 +800,48 @@
             });
         }
     </script>
+    
+    <!-- 引入主要JavaScript文件 -->
+    <script type="module" src="src/main.js"></script>
+    
+    <!-- 语言重定向脚本 -->
+    <script>
+        // 检测用户首选语言并重定向
+        function detectLanguageAndRedirect() {
+            // 检查URL参数是否指定了语言
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam && ['en', 'zh', 'es'].includes(langParam)) {
+                window.location.href = `/${langParam}/`;
+                return;
+            }
+            
+            // 检查localStorage中是否有保存的语言偏好
+            const storedLang = localStorage.getItem('language');
+            if (storedLang && ['en', 'zh', 'es'].includes(storedLang)) {
+                window.location.href = `/${storedLang}/`;
+                return;
+            }
+            
+            // 检查浏览器语言
+            const browserLang = navigator.language.split('-')[0];
+            if (['zh'].includes(browserLang)) {
+                window.location.href = '/zh/';
+                return;
+            } else if (['es'].includes(browserLang)) {
+                window.location.href = '/es/';
+                return;
+            }
+            
+            // 默认为英文
+            window.location.href = '/en/';
+        }
+        
+        // 如果当前是根路径，则执行重定向
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            detectLanguageAndRedirect();
+        }
+    </script>
 
     <script>
         // 处理从示例页面传递的参数
