@@ -12,10 +12,10 @@
             <div class="flex justify-between items-center h-16">
                 <h1 class="text-2xl font-bold text-gray-900" data-i18n="examples-header">Image Pixelator - Examples</h1>
                 <div class="flex items-center space-x-4">
-                    <a href="/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
+                    <a href="/en/" class="text-blue-600 hover:text-blue-800" data-i18n="back-to-tool">← Back to Tool</a>
                     <div class="language-selector">
                         <select id="languageSelect" class="border rounded px-2 py-1 text-sm">
-                            <option value="en">🇺🇸 English</option>
+                            <option value="en" selected>🇺🇸 English</option>
                             <option value="zh">🇨🇳 中文</option>
                             <option value="es">🇪🇸 Español</option>
                         </select>
@@ -171,7 +171,7 @@
             <p class="text-blue-700 mb-6" data-i18n="cta-description">
                 Try our free image pixelator tool and create amazing pixel art from your photos!
             </p>
-            <a href="/" class="inline-block bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium" data-i18n="start-pixelating">
+            <a href="/en/" class="inline-block bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium" data-i18n="start-pixelating">
                 Start Pixelating →
             </a>
         </section>
@@ -186,7 +186,7 @@
     </footer>
 
     <script type="module">
-        import { I18nManager } from './src/utils/i18n.js';
+        import { I18nManager } from '/src/utils/i18n.js';
         
         // Initialize i18n
         const i18n = new I18nManager();
