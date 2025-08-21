@@ -1,5 +1,5 @@
 import { ImagePixelator } from './utils/pixelator.js';
-import { I18nManager } from './i18n/i18n.js';
+// 移除i18n导入
 
 /**
  * Main Application Controller
@@ -7,7 +7,7 @@ import { I18nManager } from './i18n/i18n.js';
 class PixelatorApp {
   constructor() {
     this.pixelator = new ImagePixelator();
-    this.i18n = new I18nManager();
+    // 移除i18n管理器
     this.currentImage = null;
     this.history = [];
     this.historyIndex = -1;
@@ -19,7 +19,7 @@ class PixelatorApp {
    * Initialize application
    */
   init() {
-    this.i18n.init();
+    // 移除i18n初始化
     this.setupEventListeners();
     this.showWelcomeGuide();
   }
@@ -346,7 +346,7 @@ class PixelatorApp {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
             </svg>
           </div>
-          <p class="text-sm font-semibold text-gray-700">${this.i18n.t('processing')}</p>
+          <p class="text-sm font-semibold text-gray-700">Processing...</p>
         </div>
       `;
     } else {
@@ -357,8 +357,8 @@ class PixelatorApp {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
           </svg>
         </div>
-        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">${this.i18n.t('upload-prompt')}</p>
-        <p class="text-xs text-gray-500" data-i18n="upload-limits">${this.i18n.t('upload-limits')}</p>
+        <p class="text-sm font-semibold text-gray-700 mb-1">Click to upload or drag image here</p>
+        <p class="text-xs text-gray-500">JPG, PNG, WebP • Max 20MB</p>
       `;
     }
   }
@@ -380,7 +380,8 @@ class PixelatorApp {
         errorKey = 'error-loading';
     }
     
-    this.i18n.showError(errorKey);
+    // 移除i18n错误显示
+    console.error('Error:', errorKey);
   }
 
   /**
@@ -468,10 +469,10 @@ class PixelatorApp {
     if (container.classList.contains('hidden')) {
       this.createComparisonView();
       container.classList.remove('hidden');
-      button.textContent = this.i18n.t('hide-comparison') || 'Hide Comparison';
+      button.textContent = 'Hide Comparison';
     } else {
       container.classList.add('hidden');
-      button.textContent = this.i18n.t('show-comparison') || 'Show Comparison';
+      button.textContent = 'Show Comparison';
     }
   }
 
@@ -622,8 +623,8 @@ class PixelatorApp {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
           </svg>
         </div>
-        <p class="text-sm font-semibold text-gray-700 mb-1" data-i18n="upload-prompt">${this.i18n.t('upload-prompt')}</p>
-        <p class="text-xs text-gray-500" data-i18n="upload-limits">${this.i18n.t('upload-limits')}</p>
+        <p class="text-sm font-semibold text-gray-700 mb-1">Click to upload or drag image here</p>
+        <p class="text-xs text-gray-500">JPG, PNG, WebP • Max 20MB</p>
       `;
     }
     
@@ -636,7 +637,7 @@ class PixelatorApp {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
           </svg>
         </div>
-        <p class="text-sm font-semibold text-gray-700" data-i18n="pixelated-preview">${this.i18n.t('pixelated-preview')}</p>
+        <p class="text-sm font-semibold text-gray-700">Pixelated preview will appear here</p>
       `;
     }
     
@@ -712,7 +713,7 @@ class PixelatorApp {
     const hasVisited = localStorage.getItem('pixelator-visited');
     if (!hasVisited) {
       setTimeout(() => {
-        const message = this.i18n.t('upload-prompt');
+        const message = 'Please upload an image first';
         // Could show a tooltip or modal here
         localStorage.setItem('pixelator-visited', 'true');
       }, 1000);
