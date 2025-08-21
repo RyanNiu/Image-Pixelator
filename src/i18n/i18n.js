@@ -20,32 +20,41 @@ export class I18nManager {
   }
 
   detectLanguage() {
-    // Check URL first
+    // Check URL first - 这是最重要的，因为用户直接访问了特定语言的页面
     const urlLang = this.getLanguageFromURL();
     if (urlLang && this.translations[urlLang]) {
+      console.log('Language detected from URL:', urlLang);
       return urlLang;
     }
 
     // Check localStorage
     const storedLang = localStorage.getItem('language');
     if (storedLang && this.translations[storedLang]) {
+      console.log('Language detected from localStorage:', storedLang);
       return storedLang;
     }
 
     // Check browser language
     const browserLang = navigator.language.split('-')[0];
     if (this.translations[browserLang]) {
+      console.log('Language detected from browser:', browserLang);
       return browserLang;
     }
 
     // Default to English
+    console.log('Using default language: en');
     return this.defaultLanguage;
   }
 
   getLanguageFromURL() {
     const path = window.location.pathname;
-    const langMatch = path.match(/^\/(en|zh|es|fr|ru)\//);
-    return langMatch ? langMatch[1] : null;
+    // 匹配语言路径，支持有无尾随斜杠的情况
+    const langMatch = path.match(/^\/(en|zh|es|fr|ru)(?:\/|$)/);
+    if (langMatch) {
+      console.log('Detected language from URL:', langMatch[1]);
+      return langMatch[1];
+    }
+    return null;
   }
 
   getCurrentLanguage() {
@@ -85,8 +94,19 @@ export class I18nManager {
   }
 
   translatePage() {
+    // 只有当检测到的语言与当前页面语言不匹配时才进行翻译
+    const urlLang = this.getLanguageFromURL();
+    
+    // 如果URL中的语言与当前语言匹配，说明页面已经是正确的语言版本
+    if (urlLang && urlLang === this.currentLanguage) {
+      console.log('Page is already in correct language:', urlLang);
+      return;
+    }
+    
     // Translate all elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
+    console.log(`Translating ${elements.length} elements to ${this.currentLanguage}`);
+    
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const translation = this.t(key);
