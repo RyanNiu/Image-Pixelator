@@ -697,12 +697,30 @@ class PixelatorApp {
     const currentPath = window.location.pathname;
     const options = languageSelect.querySelectorAll('option');
     
+    // Reset all options first
+    options.forEach(option => {
+      option.selected = false;
+    });
+    
+    // Find matching option based on current path
+    let foundMatch = false;
     options.forEach(option => {
       const optionPath = option.value;
-      if (currentPath.includes(optionPath) || optionPath.includes(currentPath)) {
+      // Check for exact match or if current path starts with option path
+      if (currentPath === optionPath || 
+          (optionPath !== '/en/' && currentPath.startsWith(optionPath))) {
         option.selected = true;
+        foundMatch = true;
       }
     });
+    
+    // If no match found and we're on root path, select English
+    if (!foundMatch && (currentPath === '/' || currentPath === '')) {
+      const englishOption = languageSelect.querySelector('option[value="/en/"]');
+      if (englishOption) {
+        englishOption.selected = true;
+      }
+    }
   }
 
   /**
