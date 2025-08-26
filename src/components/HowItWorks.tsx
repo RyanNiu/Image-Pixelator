@@ -49,7 +49,7 @@ export default function HowItWorks({
               </div>
               
               {/* Connection Line (except for last step) */}
-              {index < steps.length - 1 && (
+              {/* {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gray-200 transform translate-x-1/2 z-0" 
                      style={{ left: 'calc(50% + 2rem)' }}>
                   <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
@@ -58,7 +58,7 @@ export default function HowItWorks({
                     </svg>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           ))}
         </div>

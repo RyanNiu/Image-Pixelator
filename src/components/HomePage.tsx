@@ -149,31 +149,36 @@ export default function HomePage({ lang }: HomePageProps) {
           digitSize={1.2}
           timeScale={1}
           pause={false}
-          scanlineIntensity={1}
+          scanlineIntensity={0.5}
           glitchAmount={1}
           flickerAmount={1}
           noiseAmp={1}
           chromaticAberration={0}
           dither={0}
-          curvature={0}
-          tint="#ffffff"
+          curvature={0.1}
+          tint="#547850"
           mouseReact={true}
-          mouseStrength={0.5}
-          pageLoadAnimation={false}
-          brightness={1}
+          mouseStrength={0.15}
+          pageLoadAnimation={true}
+          brightness={0.7}
         />
       </div>
       
       {/* 粒子轨迹效果 */}
-      <div className="fixed inset-0" style={{ pointerEvents: 'none', zIndex: 9999 }}>
+      <div 
+        className="fixed inset-0" 
+        style={{ 
+          zIndex: 9999,
+          pointerEvents: 'none'
+        }}
+      >
         <PixelTrail
-          gridSize={15}
-          trailSize={0.8}
-          maxAge={120}
-          interpolate={2}
+          gridSize={50}
+          trailSize={0.05}
+          maxAge={300}
+          interpolate={4}
           color="rgba(59, 130, 246, 0.7)"
-          gooeyFilter={{ id: "custom-goo-filter", strength: 1.5 }}
-          style={{ height: '100vh' }}
+          gooeyFilter={{ id: "custom-goo-filter", strength: 0.1 }}
         />
       </div>
       
@@ -214,7 +219,7 @@ export default function HomePage({ lang }: HomePageProps) {
           {/* Example Images */}
           <div className="mb-6">
             <h3 className="text-sm font-medium text-gray-700 mb-4">
-              {t['nav-examples'] || '示例图片'} - 点击加载
+              {t['nav-examples'] || '示例图片'}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
               {t.exampleImages.map((example, index) => (
@@ -222,7 +227,7 @@ export default function HomePage({ lang }: HomePageProps) {
                   key={index} 
                   className="cursor-pointer rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-500 hover:shadow-md transition-all duration-200 group relative"
                   onClick={() => handleExampleClick(example.src)}
-                  title={`点击加载: ${example.alt}`}
+                  title={`${example.alt}`}
                 >
                   <Image
                     src={`/asset/example/${example.src}`}
@@ -232,9 +237,9 @@ export default function HomePage({ lang }: HomePageProps) {
                     className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-200"
                   />
                   <div className="absolute inset-0 bg-blue-600 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-200 flex items-center justify-center">
-                    <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-medium">
+                    {/* <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-medium">
                       点击加载
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               ))}

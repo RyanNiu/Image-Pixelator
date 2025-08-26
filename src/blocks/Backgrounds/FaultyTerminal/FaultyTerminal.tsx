@@ -1,7 +1,3 @@
-/*
-	Installed from https://reactbits.dev/ts/tailwind/
-*/
-
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import React, { useEffect, useRef, useMemo, useCallback } from "react";
 
@@ -274,8 +270,8 @@ export default function FaultyTerminal({
   ...rest
 }: FaultyTerminalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const programRef = useRef<Program>(null);
-  const rendererRef = useRef<Renderer>(null);
+  const programRef = useRef<Program | null>(null);
+  const rendererRef = useRef<Renderer | null>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
   const frozenTimeRef = useRef(0);
@@ -292,12 +288,12 @@ export default function FaultyTerminal({
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     const ctn = containerRef.current;
-    if (!ctn) return;
+    if (!ctn || !mouseReact) return;
     const rect = ctn.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = 1 - (e.clientY - rect.top) / rect.height;
     mouseRef.current = { x, y };
-  }, []);
+  }, [mouseReact]);
 
   useEffect(() => {
     const ctn = containerRef.current;
@@ -404,12 +400,17 @@ export default function FaultyTerminal({
     rafRef.current = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
-    if (mouseReact) ctn.addEventListener("mousemove", handleMouseMove);
+    // 使用全局鼠标监听器确保鼠标事件能够被正确捕获
+    if (mouseReact) {
+      document.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       resizeObserver.disconnect();
-      if (mouseReact) ctn.removeEventListener("mousemove", handleMouseMove);
+      if (mouseReact) {
+        document.removeEventListener("mousemove", handleMouseMove);
+      }
       if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       loadAnimationStartRef.current = 0;

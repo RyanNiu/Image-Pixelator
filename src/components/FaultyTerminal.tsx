@@ -292,12 +292,12 @@ export default function FaultyTerminal({
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     const ctn = containerRef.current;
-    if (!ctn) return;
+    if (!ctn || !mouseReact) return;
     const rect = ctn.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = 1 - (e.clientY - rect.top) / rect.height;
     mouseRef.current = { x, y };
-  }, []);
+  }, [mouseReact]);
 
   useEffect(() => {
     const ctn = containerRef.current;
@@ -404,12 +404,17 @@ export default function FaultyTerminal({
     rafRef.current = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
-    if (mouseReact) ctn.addEventListener("mousemove", handleMouseMove);
+    // 使用全局鼠标监听器确保鼠标事件能够被正确捕获
+    if (mouseReact) {
+      document.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       resizeObserver.disconnect();
-      if (mouseReact) ctn.removeEventListener("mousemove", handleMouseMove);
+      if (mouseReact) {
+        document.removeEventListener("mousemove", handleMouseMove);
+      }
       if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       loadAnimationStartRef.current = 0;
