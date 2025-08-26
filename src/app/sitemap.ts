@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://imagepixelator.pics'
+  const baseUrl = 'https://www.imagepixelator.pics'
   const lastModified = new Date('2025-01-25')
   
   // 支持的语言
