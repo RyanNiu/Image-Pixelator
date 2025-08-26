@@ -1,13 +1,14 @@
 import ExamplesPage from '@/components/ExamplesPage'
 
 interface ExamplesPageRouteProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 
-export default function ExamplesPageRoute({ params }: ExamplesPageRouteProps) {
-  return <ExamplesPage lang={params.lang} />
+export default async function ExamplesPageRoute({ params }: ExamplesPageRouteProps) {
+  const { lang } = await params
+  return <ExamplesPage lang={lang} />
 }
 
 export async function generateStaticParams() {

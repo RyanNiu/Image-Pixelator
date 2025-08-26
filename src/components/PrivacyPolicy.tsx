@@ -58,7 +58,7 @@ export default function PrivacyPolicy({
   className = '' 
 }: PrivacyPolicyProps) {
   return (
-    <section id="privacy" className={`py-16 bg-white ${className}`}>
+    <section id="privacy" className={`py-16 ${className}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">

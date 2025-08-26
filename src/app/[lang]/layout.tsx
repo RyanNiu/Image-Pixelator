@@ -22,9 +22,10 @@ const getSEOConfig = (lang: string) => {
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { lang: string } 
+  params: Promise<{ lang: string }> 
 }): Promise<Metadata> {
-  const seo = getSEOConfig(params.lang)
+  const { lang } = await params
+  const seo = getSEOConfig(lang)
   
   return {
     title: seo.title,
@@ -50,8 +51,8 @@ export async function generateMetadata({
       description: seo.description,
       url: seo.canonical,
       siteName: 'Image Pixelator',
-      locale: params.lang,
-      alternateLocale: ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko'].filter(l => l !== params.lang),
+      locale: lang,
+      alternateLocale: ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko'].filter(l => l !== lang),
       images: [
         {
           url: 'https://imagepixelator.pics/og-image.png',
@@ -82,20 +83,21 @@ export async function generateMetadata({
   }
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params
 }: {
   children: React.ReactNode
-  params: { lang: string }
+  params: Promise<{ lang: string }>
 }) {
-  if (!locales.includes(params.lang)) {
+  const { lang } = await params
+  if (!locales.includes(lang)) {
     notFound()
   }
 
   return (
-    <LanguageProvider lang={params.lang}>
-      <div data-lang={params.lang}>
+    <LanguageProvider lang={lang}>
+      <div data-lang={lang}>
         {children}
       </div>
     </LanguageProvider>

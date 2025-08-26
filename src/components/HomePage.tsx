@@ -19,6 +19,9 @@ import FAQ, { DEFAULT_FAQS } from '@/components/FAQ'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
 import Footer, { DEFAULT_FOOTER_SECTIONS } from '@/components/Footer'
 import StructuredData from '@/components/StructuredData'
+import FaultyTerminal from '@/components/FaultyTerminal'
+import PixelTrail from '@/components/PixelTrail'
+import FormatSelector from '@/components/FormatSelector'
 
 interface HomePageProps {
   lang: string
@@ -138,7 +141,46 @@ export default function HomePage({ lang }: HomePageProps) {
       {/* 结构化数据 */}
       <StructuredData lang={lang} />
       
-      <div className="min-h-screen bg-gray-50">
+      {/* 全屏终端背景 */}
+      <div className="fixed inset-0 z-0">
+        <FaultyTerminal
+          scale={1.5}
+          gridMul={[2, 1]}
+          digitSize={1.2}
+          timeScale={1}
+          pause={false}
+          scanlineIntensity={1}
+          glitchAmount={1}
+          flickerAmount={1}
+          noiseAmp={1}
+          chromaticAberration={0}
+          dither={0}
+          curvature={0}
+          tint="#ffffff"
+          mouseReact={true}
+          mouseStrength={0.5}
+          pageLoadAnimation={false}
+          brightness={1}
+        />
+      </div>
+      
+      {/* 粒子轨迹效果 */}
+      <div className="fixed inset-0" style={{ pointerEvents: 'none', zIndex: 9999 }}>
+        <PixelTrail
+          gridSize={15}
+          trailSize={0.8}
+          maxAge={120}
+          interpolate={2}
+          color="rgba(59, 130, 246, 0.7)"
+          gooeyFilter={{ id: "custom-goo-filter", strength: 1.5 }}
+          style={{ height: '100vh' }}
+        />
+      </div>
+      
+      {/* 半透明遮罩 */}
+      <div className="fixed inset-0 bg-black bg-opacity-40 z-20"></div>
+      
+      <div className="relative z-30 min-h-screen">
         {/* 新的导航组件 */}
         <Navigation 
           title={t.title}
@@ -149,32 +191,32 @@ export default function HomePage({ lang }: HomePageProps) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <section className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               {t.title}
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-6">{t.description}</p>
+          <p className="text-xl md:text-2xl text-gray-200 mb-6">{t.description}</p>
           
           {/* Privacy Badges */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <div className="inline-flex items-center bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
+            <div className="inline-flex items-center bg-green-600 bg-opacity-80 text-green-100 px-4 py-2 rounded-full text-sm font-medium">
               <span>🔒 {t.privacyBadge}</span>
             </div>
-            <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+            <div className="inline-flex items-center bg-blue-600 bg-opacity-80 text-blue-100 px-4 py-2 rounded-full text-sm font-medium">
               <span>🎯 {t.freeBadge}</span>
             </div>
           </div>
         </section>
 
         {/* Upload Section */}
-        <section className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <section className="bg-white bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg p-6 mb-8">
           {/* Example Images */}
           <div className="mb-6">
             <h3 className="text-sm font-medium text-gray-700 mb-4">
               {t['nav-examples'] || '示例图片'} - 点击加载
             </h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
               {t.exampleImages.map((example, index) => (
                 <div 
                   key={index} 
@@ -401,20 +443,12 @@ export default function HomePage({ lang }: HomePageProps) {
                   </button>
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t.downloadFormat || '下载格式'}
-                </label>
-                <select
-                  value={downloadFormat}
-                  onChange={(e) => setDownloadFormat(e.target.value as DownloadFormat)}
-                  className="w-full border rounded px-2 py-1 text-xs bg-white"
-                >
-                  {ImageDownloader.getSupportedFormats().map(format => (
-                    <option key={format} value={format}>{format.toUpperCase()}</option>
-                  ))}
-                </select>
-              </div>
+              <FormatSelector
+                value={downloadFormat}
+                onChange={setDownloadFormat}
+                className="w-full border rounded px-2 py-1 text-xs bg-white"
+                label={t.downloadFormat || '下载格式'}
+              />
             </div>
 
             <button
@@ -461,123 +495,135 @@ export default function HomePage({ lang }: HomePageProps) {
         </section>
 
         {/* HowItWorks 组件 */}
-        <HowItWorks 
-          title={t['how-it-works']}
-          subtitle={t['how-it-works-desc']}
-          steps={DEFAULT_STEPS.map((step, index) => ({
-            ...step,
-            title: t[`step-${index + 1}-title` as keyof typeof t] as string || step.title,
-            description: t[`step-${index + 1}-desc` as keyof typeof t] as string || step.description
-          }))}
-        />
+        <div className="bg-white bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg mb-8">
+          <HowItWorks 
+            title={t['how-it-works']}
+            subtitle={t['how-it-works-desc']}
+            steps={DEFAULT_STEPS.map((step, index) => ({
+              ...step,
+              title: t[`step-${index + 1}-title` as keyof typeof t] as string || step.title,
+              description: t[`step-${index + 1}-desc` as keyof typeof t] as string || step.description
+            }))}
+          />
+        </div>
 
         {/* Features 组件 */}
-        <FeaturesList 
-          title={t['features-title']}
-          subtitle={t['features-desc']}
-          features={DEFAULT_FEATURES.map((feature, index) => ({
-            ...feature,
-            title: t[`feature-${index + 1}-title` as keyof typeof t] as string || feature.title,
-            description: t[`feature-${index + 1}-desc` as keyof typeof t] as string || feature.description
-          }))}
-        />
+        <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg mb-8">
+          <FeaturesList 
+            title={t['features-title']}
+            subtitle={t['features-desc']}
+            features={DEFAULT_FEATURES.map((feature, index) => ({
+              ...feature,
+              title: t[`feature-${index + 1}-title` as keyof typeof t] as string || feature.title,
+              description: t[`feature-${index + 1}-desc` as keyof typeof t] as string || feature.description
+            }))}
+          />
+        </div>
 
         {/* Examples 组件 */}
-        <ExamplesGallery 
-          title={t['examples-title']}
-          subtitle={t['examples-desc']}
-          examples={DEFAULT_EXAMPLES.map((example) => ({
-            ...example,
-            title: t[example.titleKey as keyof typeof t] as string || example.title,
-            description: t[example.descriptionKey as keyof typeof t] as string || example.description
-          }))}
-          lang={lang}
-          viewAllText={t['view-all-examples']}
-          settingsText={t.settings}
-        />
+        <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg mb-8">
+          <ExamplesGallery 
+            title={t['examples-title']}
+            subtitle={t['examples-desc']}
+            examples={DEFAULT_EXAMPLES.map((example) => ({
+              ...example,
+              title: t[example.titleKey as keyof typeof t] as string || example.title,
+              description: t[example.descriptionKey as keyof typeof t] as string || example.description
+            }))}
+            lang={lang}
+            viewAllText={t['view-all-examples']}
+            settingsText={t.settings}
+          />
+        </div>
 
         {/* FAQ 组件 */}
-        <FAQ 
-          title={t['faq-title']}
-          subtitle={t['faq-subtitle']}
-          faqs={[
-            {
-              id: 'what-is-pixelator',
-              question: t['faq-q1'],
-              answer: t['faq-a1'],
-              category: 'general'
-            },
-            {
-              id: 'how-it-works', 
-              question: t['faq-q2'],
-              answer: t['faq-a2'],
-              category: 'technical'
-            },
-            {
-              id: 'is-free',
-              question: t['faq-q3'], 
-              answer: t['faq-a3'],
-              category: 'pricing'
-            },
-            {
-              id: 'supported-formats',
-              question: t['faq-q4'],
-              answer: t['faq-a4'], 
-              category: 'technical'
-            },
-            {
-              id: 'privacy-protection',
-              question: t['faq-q5'],
-              answer: t['faq-a5'],
-              category: 'privacy'
-            }
-          ]}
-          contactText={t['faq-contact']}
-          contactButtonText={t['faq-contact-btn']}
-        />
+        <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg mb-8">
+          <FAQ 
+            title={t['faq-title']}
+            subtitle={t['faq-subtitle']}
+            faqs={[
+              {
+                id: 'what-is-pixelator',
+                question: t['faq-q1'],
+                answer: t['faq-a1'],
+                category: 'general'
+              },
+              {
+                id: 'how-it-works', 
+                question: t['faq-q2'],
+                answer: t['faq-a2'],
+                category: 'technical'
+              },
+              {
+                id: 'is-free',
+                question: t['faq-q3'], 
+                answer: t['faq-a3'],
+                category: 'pricing'
+              },
+              {
+                id: 'supported-formats',
+                question: t['faq-q4'],
+                answer: t['faq-a4'], 
+                category: 'technical'
+              },
+              {
+                id: 'privacy-protection',
+                question: t['faq-q5'],
+                answer: t['faq-a5'],
+                category: 'privacy'
+              }
+            ]}
+            contactText={t['faq-contact']}
+            contactButtonText={t['faq-contact-btn']}
+          />
+        </div>
 
         {/* 隐私政策组件 */}
-        <PrivacyPolicy 
-          title={t['privacy-title']}
-          subtitle={t['privacy-subtitle']}
-          noDataTitle={t['privacy-no-data']}
-          description={t['privacy-description']}
-          localText={t['privacy-local']}
-          noUploadText={t['privacy-no-upload']}
-          noStorageText={t['privacy-no-storage']}
-          secureText={t['privacy-secure']}
-          dataTitle={t['privacy-data-title']}
-          dataDesc={t['privacy-data-desc']}
-          dataClient={t['privacy-data-client']}
-          dataNoUpload={t['privacy-data-no-upload']}
-          dataNoCollect={t['privacy-data-no-collect']}
-          dataLocal={t['privacy-data-local']}
-          analyticsTitle={t['privacy-analytics-title']}
-          analyticsDesc={t['privacy-analytics-desc']}
-          analyticsGA={t['privacy-analytics-ga']}
-          analyticsClarity={t['privacy-analytics-clarity']}
-          analyticsIP={t['privacy-analytics-ip']}
-          rightsTitle={t['privacy-rights-title']}
-          rightsDesc={t['privacy-rights-desc']}
-          rightsNoData={t['privacy-rights-no-data']}
-          rightsControl={t['privacy-rights-control']}
-          rightsNoAccount={t['privacy-rights-no-account']}
-          rightsClear={t['privacy-rights-clear']}
-        />
+        <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg mb-8">
+          <PrivacyPolicy 
+            title={t['privacy-title']}
+            subtitle={t['privacy-subtitle']}
+            noDataTitle={t['privacy-no-data']}
+            description={t['privacy-description']}
+            localText={t['privacy-local']}
+            noUploadText={t['privacy-no-upload']}
+            noStorageText={t['privacy-no-storage']}
+            secureText={t['privacy-secure']}
+            dataTitle={t['privacy-data-title']}
+            dataDesc={t['privacy-data-desc']}
+            dataClient={t['privacy-data-client']}
+            dataNoUpload={t['privacy-data-no-upload']}
+            dataNoCollect={t['privacy-data-no-collect']}
+            dataLocal={t['privacy-data-local']}
+            analyticsTitle={t['privacy-analytics-title']}
+            analyticsDesc={t['privacy-analytics-desc']}
+            analyticsGA={t['privacy-analytics-ga']}
+            analyticsClarity={t['privacy-analytics-clarity']}
+            analyticsIP={t['privacy-analytics-ip']}
+            rightsTitle={t['privacy-rights-title']}
+            rightsDesc={t['privacy-rights-desc']}
+            rightsNoData={t['privacy-rights-no-data']}
+            rightsControl={t['privacy-rights-control']}
+            rightsNoAccount={t['privacy-rights-no-account']}
+            rightsClear={t['privacy-rights-clear']}
+          />
+        </div>
       </main>
       
       {/* 页脚组件 */}
-      <Footer 
-        description={t['footer-description']}
-        sections={DEFAULT_FOOTER_SECTIONS.map(section => ({
-          ...section,
-          title: t[`footer-${section.title.toLowerCase()}` as keyof typeof t] as string || section.title,
-          links: section.links.map(link => ({
-            ...link,
-            label: t[`footer-${link.label.toLowerCase().replace(/\s+/g, '-')}` as keyof typeof t] as string || link.label
-          }))
-        }))}
-      />
+      <div className="bg-gray-900 bg-opacity-70 backdrop-blur-sm">
+        <Footer 
+          description={t['footer-description']}
+          sections={DEFAULT_FOOTER_SECTIONS.map(section => ({
+            ...section,
+            title: t[`footer-${section.title.toLowerCase()}` as keyof typeof t] as string || section.title,
+            links: section.links.map(link => ({
+              ...link,
+              label: t[`footer-${link.label.toLowerCase().replace(/\s+/g, '-')}` as keyof typeof t] as string || link.label
+            }))
+          }))}
+        />
+      </div>
     </div>
     </>
   )

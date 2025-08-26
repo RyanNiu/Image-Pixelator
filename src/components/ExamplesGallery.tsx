@@ -33,7 +33,7 @@ export default function ExamplesGallery({
   settingsText 
 }: ExamplesGalleryProps) {
   return (
-    <section id="examples" className="py-16 bg-gray-50">
+    <section id="examples" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">{title}</h2>
@@ -44,7 +44,7 @@ export default function ExamplesGallery({
           {examples.map((example) => (
             <div 
               key={example.id} 
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              className="bg-white bg-opacity-70 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
               <div className="h-50 flex items-center justify-center bg-gray-100">
                 <picture>
@@ -72,7 +72,7 @@ export default function ExamplesGallery({
         <div className="text-center mt-12">
           <Link
             href={`/${lang}/examples`}
-            className="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors border"
+            className="inline-block bg-white bg-opacity-70 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 hover:bg-opacity-70 transition-colors border"
           >
             {viewAllText} →
           </Link>

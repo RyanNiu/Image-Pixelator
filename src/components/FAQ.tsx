@@ -34,7 +34,7 @@ export default function FAQ({ title, subtitle, faqs, contactText, contactButtonT
   const isOpen = (id: string) => openItems.has(id);
 
   return (
-    <section id="faq" className={`py-16 bg-white ${className}`}>
+    <section id="faq" className={`py-16 ${className}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
