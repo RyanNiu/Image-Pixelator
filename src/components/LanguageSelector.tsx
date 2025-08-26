@@ -3,20 +3,11 @@
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+import { SUPPORTED_LANGUAGES, getLanguageDisplayName } from '@/i18n';
 
 interface LanguageSelectorProps {
   currentLang: string;
 }
-
-const languages = [
-  { code: 'en', name: '🇺🇸 English' },
-  { code: 'zh', name: '🇨🇳 中文' },
-  { code: 'es', name: '🇪🇸 Español' },
-  { code: 'fr', name: '🇫🇷 Français' },
-  { code: 'ru', name: '🇷🇺 Русский' },
-  { code: 'hi', name: '🇮🇳 हिन्दी' },
-  { code: 'ko', name: '🇰🇷 한국어' }
-];
 
 // 内部组件，只在客户端渲染
 function LanguageSelectorClient({ currentLang }: LanguageSelectorProps) {
@@ -46,9 +37,9 @@ function LanguageSelectorClient({ currentLang }: LanguageSelectorProps) {
       onChange={(e) => handleLanguageChange(e.target.value)}
       className="border rounded px-3 py-1 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
     >
-      {languages.map((lang) => (
-        <option key={lang.code} value={lang.code}>
-          {lang.name}
+      {SUPPORTED_LANGUAGES.map((langCode) => (
+        <option key={langCode} value={langCode}>
+          {getLanguageDisplayName(langCode)}
         </option>
       ))}
     </select>

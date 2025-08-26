@@ -9,9 +9,10 @@ import { fr } from './locales/fr'
 import { ru } from './locales/ru'
 import { hi } from './locales/hi'
 import { ko } from './locales/ko'
+import { ar } from './locales/ar'
 
 // 支持的语言列表
-export const SUPPORTED_LANGUAGES: SupportedLanguage[] = ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko']
+export const SUPPORTED_LANGUAGES: SupportedLanguage[] = ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko', 'ar']
 
 // 默认语言
 export const DEFAULT_LANGUAGE: SupportedLanguage = 'en'
@@ -24,7 +25,8 @@ export const translations: TranslationRecord = {
   fr,
   ru,
   hi,
-  ko
+  ko,
+  ar
 }
 
 /**
@@ -62,7 +64,8 @@ export function getLanguageDisplayName(lang: SupportedLanguage): string {
     fr: '🇫🇷 Français',
     ru: '🇷🇺 Русский',
     hi: '🇮🇳 हिन्दी',
-    ko: '🇰🇷 한국어'
+    ko: '🇰🇷 한국어',
+    ar: '🇸🇦 العربية'
   }
   return displayNames[lang] || displayNames[DEFAULT_LANGUAGE]
 }

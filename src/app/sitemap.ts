@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date('2025-01-25')
   
   // 支持的语言
-  const languages = ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko']
+  const languages = ['en', 'zh', 'es', 'fr', 'ru', 'hi', 'ko', 'ar']
   
   // 页面路径
   const paths = ['', '/examples']

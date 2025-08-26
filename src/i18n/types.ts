@@ -159,5 +159,5 @@ export interface Translation {
   }
 }
 
-export type SupportedLanguage = 'en' | 'zh' | 'es' | 'fr' | 'ru' | 'hi' | 'ko'
+export type SupportedLanguage = 'en' | 'zh' | 'es' | 'fr' | 'ru' | 'hi' | 'ko' | 'ar'
 export type TranslationRecord = Record<SupportedLanguage, Translation>
