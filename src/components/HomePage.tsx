@@ -144,7 +144,7 @@ export default function HomePage({ lang }: HomePageProps) {
       {/* 全屏终端背景 */}
       <div className="fixed inset-0 z-0">
         <FaultyTerminal
-          scale={1.5}
+          scale={2.5}
           gridMul={[2, 1]}
           digitSize={1.2}
           timeScale={1}
@@ -154,13 +154,13 @@ export default function HomePage({ lang }: HomePageProps) {
           flickerAmount={1}
           noiseAmp={1}
           chromaticAberration={0}
-          dither={0}
-          curvature={0.1}
+          dither={0.5}
+          curvature={0}
           tint="#547850"
           mouseReact={true}
-          mouseStrength={0.15}
+          mouseStrength={1.5}
           pageLoadAnimation={true}
-          brightness={0.7}
+          brightness={0.8}
         />
       </div>
       
@@ -173,11 +173,11 @@ export default function HomePage({ lang }: HomePageProps) {
         }}
       >
         <PixelTrail
-          gridSize={50}
-          trailSize={0.05}
+          gridSize={60}
+          trailSize={0.1}
           maxAge={300}
           interpolate={4}
-          color="rgba(59, 130, 246, 0.7)"
+          color="rgba(37, 187, 0, 0.27)"
           gooeyFilter={{ id: "custom-goo-filter", strength: 0.1 }}
         />
       </div>

@@ -28,7 +28,8 @@ function LanguageSelectorClient({ currentLang }: LanguageSelectorProps) {
   }, []);
 
   const handleLanguageChange = (newLang: string) => {
-    router.push(`/${newLang}`);
+    // 使用 replace 而不是 push，避免添加到历史记录中，并禁用自动滚动
+    router.replace(`/${newLang}`, { scroll: false });
   };
 
   if (!mounted) {

@@ -41,7 +41,7 @@ export default function Navigation({
   };
 
   return (
-    <header className="bg-white bg-opacity-70 backdrop-blur-sm shadow-sm border-b sticky top-0 z-50">
+    <header className="bg-white bg-opacity-70 backdrop-blur-sm shadow-sm border-b sticky top-0 z-50" style={{ scrollMarginTop: '0px' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Title */}
