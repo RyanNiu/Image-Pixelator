@@ -1,7 +1,7 @@
 {
-  "name": "Image Pixelator - Free Online Pixel Art Tool",
+  "name": "Image Pixelator - FREE Online Pixel Art Tool",
   "short_name": "Image Pixelator",
-  "description": "Convert images to pixel art instantly in your browser. Free, private, and secure online pixel art generator.",
+  "description": "🎯 100% FREE pixel art converter! ✨ No registration needed. Convert images to pixel art instantly in your browser - private and secure!",
   "start_url": "/en",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -9,19 +9,30 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
-  "categories": ["graphics", "photography", "utilities"],
+  "categories": ["graphics", "photography", "utilities", "productivity"],
   "icons": [
     {
-      "src": "/LOGO.png",
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/LOGO.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "screenshots": [
@@ -29,18 +40,18 @@
       "src": "/og-image.png",
       "sizes": "1200x630",
       "type": "image/png",
-      "label": "Image Pixelator main interface"
+      "label": "🎯 FREE Image Pixelator - No Login Required"
     }
   ],
   "shortcuts": [
     {
-      "name": "Start Pixelating",
+      "name": "Start Pixelating - FREE",
       "short_name": "Pixelate",
-      "description": "Start converting images to pixel art",
+      "description": "Start converting images to pixel art - 100% FREE, no login required",
       "url": "/en#upload",
       "icons": [
         {
-          "src": "/LOGO.png",
+          "src": "/icon-192.png",
           "sizes": "96x96"
         }
       ]
