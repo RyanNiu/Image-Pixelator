@@ -133,6 +133,19 @@ export default function Footer({
                 className="h-12"
               />
             </a>
+            <a 
+              href="https://fazier.com/launches/www.imagepixelator.pics" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+              <img 
+                src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&theme=dark" 
+                alt="Fazier badge" 
+                width={250}
+                className="h-12"
+              />
+            </a>
           </div>
         </div>
       </div>
