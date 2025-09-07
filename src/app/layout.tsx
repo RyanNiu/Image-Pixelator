@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Analytics } from '@/components/Analytics'
 
 export const metadata: Metadata = {
   title: 'Image Pixelator',
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>{children}</body>
+      <body className="antialiased" suppressHydrationWarning>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }

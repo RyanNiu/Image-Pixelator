@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { translations } from '@/i18n/translations'
 import LanguageProvider from '@/components/LanguageProvider'
+import { Analytics } from '@/components/Analytics'
 import type { Metadata } from 'next'
 
 const locales = Object.keys(translations)
@@ -126,6 +127,7 @@ export default async function LocaleLayout({
     <LanguageProvider lang={lang}>
       <div data-lang={lang}>
         {children}
+        <Analytics />
       </div>
     </LanguageProvider>
   )
