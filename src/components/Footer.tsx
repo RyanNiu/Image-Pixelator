@@ -150,9 +150,12 @@ export default function Footer({
               <img
                 src="https://findly.tools/badges/findly-tools-badge-dark.svg"
                 alt="Featured on findly.tools"
-                // width="150"
+                width="100"
                 className="h-8"
               />
+            </a>
+            <a href="https://dang.ai/" target="_blank" >
+              <img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" alt="Dang.ai" className="h-8"/>
             </a>
           </div>
         </div>
