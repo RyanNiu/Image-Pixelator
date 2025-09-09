@@ -106,7 +106,7 @@ export default function Footer({
               <img
                 src="https://softwarebolt.com/assets/images/badge.png"
                 alt="Software Bolt"
-                className="h-12"
+                className="h-8"
               />
             </a>
             <a
@@ -118,7 +118,7 @@ export default function Footer({
               <img
                 src="https://twelve.tools/badge0-light.svg"
                 alt="Featured on Twelve Tools"
-                className="h-12"
+                className="h-8"
               />
             </a>
             <a
@@ -130,7 +130,7 @@ export default function Footer({
               <img
                 src="https://img.turbo0.com/badge-listed-light.svg"
                 alt="Listed on Turbo0"
-                className="h-12"
+                className="h-8"
               />
             </a>
             <a
@@ -143,18 +143,18 @@ export default function Footer({
                 src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&theme=dark"
                 alt="Fazier badge"
                 // width={250}
-                className="h-12"
+                className="h-8"
               />
             </a>
-            <a href="https://findly.tools/image-pixelator?utm_source=image-pixelator" target="_blank">
+            {/* <a href="https://findly.tools/image-pixelator?utm_source=image-pixelator" target="_blank">
               <img
                 src="https://findly.tools/badges/findly-tools-badge-dark.svg"
                 alt="Featured on findly.tools"
                 width="150"
               />
-            </a>
+            </a> */}
             <a href="https://dang.ai/" target="_blank" >
-              <img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" alt="Dang.ai" className="h-12" />
+              <img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" alt="Dang.ai" className="h-8" />
             </a>
           </div>
         </div>
