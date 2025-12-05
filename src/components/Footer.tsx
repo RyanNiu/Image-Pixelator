@@ -156,6 +156,9 @@ export default function Footer({
             <a href="https://dang.ai/" target="_blank" >
               <img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" alt="Dang.ai" className="h-8" />
             </a>
+            <a href="https://z-image.me" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
+              <span className="text-gray-400 text-sm hover:text-white transition-colors">友情链接: z-image.me</span>
+            </a>
           </div>
         </div>
       </div>
