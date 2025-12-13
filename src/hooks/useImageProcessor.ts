@@ -29,11 +29,11 @@ export interface UseImageProcessorReturn extends ImageProcessorState {
   resetProcessor: () => void;
   
   // Canvas refs
-  originalCanvasRef: React.RefObject<HTMLCanvasElement>;
-  processedCanvasRef: React.RefObject<HTMLCanvasElement>;
+  originalCanvasRef: React.RefObject<HTMLCanvasElement | null>;
+  processedCanvasRef: React.RefObject<HTMLCanvasElement | null>;
   
   // 文件输入ref
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 /**
