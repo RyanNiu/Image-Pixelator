@@ -162,6 +162,9 @@ export default function Footer({
             <a href="https://squarefaceicon.top" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
               <span className="text-gray-400 text-sm hover:text-white transition-colors">友情链接: squarefaceicon.top</span>
             </a>
+            <a href="https://topenclaw.top" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
+              <span className="text-gray-400 text-sm hover:text-white transition-colors">友情链接: topenclaw.top</span>
+            </a>
           </div>
         </div>
       </div>
